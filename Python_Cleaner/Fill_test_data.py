@@ -9,21 +9,20 @@ def read_file(fine_name):
             toReturn.append(row)
     return toReturn
 
-"""The objective is to join on passager id the survival rate."""
-if __name__ == "main":
+"""The objective is to join on ticket id  the survival rate into the clean test data."""
+if __name__ == "__main__":
     # read the data from test_clean
     test_data = read_file('test_clean.csv')
+    print(test_data)
+    print('zjokan')
     # read the data from the whole dataset.
-    test_data = read_file('test_clean.csv')
-    all_data = open("titanic.csv", "r")
-    all_data_rows = all_data.readlines()
+    all_data = read_file('titanic.csv')
+    print(all_data)
     # join survival rate from whole dataset to the test
+    # ticket can be used.
 
     # read from the clean
-    with open('train_clean.csv', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            print(row['first_name'], row['last_name'])
+
     # cocatenate train with test.
 
     # save as new clean_complete.

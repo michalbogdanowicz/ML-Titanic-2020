@@ -1,4 +1,4 @@
-https://github.com/gibiansky/random-forests
+http://www.cs.rtu.lv/jekabsons/regression.html
 
 Steps to build a random forest:
 
@@ -10,8 +10,3 @@ IG is computed by looking at entropy of the class distribution before and after 
 1.1) Use mean as a splitting point (numerical data)
 
 1.2) Stop grow tree when attributes are finished or when available data is < 4% ot dataset to reduce overfitting
-
-
-https://www.shogun-toolbox.org/
-
-

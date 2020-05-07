@@ -4,8 +4,9 @@ clear; close all; clc
 %% Load Data
 fprintf('Loading data ...\n');
 X = load('C:\Users\ilCONDOR\Dropbox\unibz\Semester2\Machine_Learning\Project\repo\Logistic_Regression\titanic_numerical_clean.csv');
-Y = X(:,11);
-isBinCat = [false false false false false false false false false false false];
+n = length(X(1,:));
+Y = X(:,n);
+isBinCat = zeros(n,1);
 %==========================================================
 
 %% Build and print model tree
@@ -53,7 +54,8 @@ fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
 %% Predict
-[Yq, contrib] = m5ppredict(model, [0.5 0 2 0 0 0 0 0 0 0 0]);
+P = ones(1,n);
+[Yq, contrib] = m5ppredict(model, P);
 fprintf('Prediction: %f\n', Yq(1));
 fprintf('Training set mean: %f\n', contrib(1,end));
 fprintf('Input variable contributions:\n');
@@ -119,7 +121,7 @@ figure;
 contrib = ensembleResults.OOBContrib;
 cminmax = [min(min(contrib(:,1:(end-1))))-0.5 max(max(contrib(:,1:(end-1))))+0.5];
 for i = 1 : size(X,2)
-subplot(3,5,i);
+subplot(n,5,i);
 scatter(X(:,i), contrib(:,i), 50, '.');
 ylim(cminmax); xlim([min(X(:,i)) max(X(:,i))]);
 xlabel(['x_{' num2str(i) '}']); box on;
@@ -127,7 +129,8 @@ end
 
 %% Predict
 fprintf('Predicting ensembles of trees ...\n');
-[Yq, contrib] = m5ppredict(model, [0 0 0 0 0 0 0 0 0 0 0]);
+P = ones(1,n);
+[Yq, contrib] = m5ppredict(model, P);
 fprintf('Prediction: %f\n', Yq(1));
 fprintf('In-bag mean: %f\n', contrib(1,end));
 fprintf('Input variable contributions:\n');

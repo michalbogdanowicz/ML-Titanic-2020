@@ -8,11 +8,12 @@ data = load('titanic_numerical_clean.csv');
 
 %==========================================================
 num_columns = columns(data)
- y = data(:, num_columns);
- c = cvpartition(y, 'KFold', 10)
+y = data(:, num_columns);
+k = 10; # <---- K VALUE
 
+c = cvpartition(y, 'KFold', k)
 mean_accuracy = 0;
-for iteration = 1:10 # k = 10
+for iteration = 1:k
   
   train_l_vector = training (c, iteration); % test training vector
   test_l_data = test (c, iteration); % test logic vector 
@@ -57,7 +58,7 @@ for iteration = 1:10 # k = 10
   fprintf('Train Accuracy: %f\n', acc)
   mean_accuracy = mean_accuracy + acc;
 endfor
-  fprintf('\n mean accuracy ==: %f\n', mean_accuracy / 10)
+  fprintf('\n mean accuracy ==: %f\n', mean_accuracy / k)
 
 #plotBoundry(theta,X,y,0);
 

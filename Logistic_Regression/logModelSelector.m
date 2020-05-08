@@ -4,7 +4,7 @@ clear; close all; clc
 fprintf('Loading data ...\n');
 %% Load Data
 data = load('titanic_numerical_clean.csv');
-
+data = data(randperm(size(data, 1)), :);
 %==========================================================
 num_columns = columns(data)
 y = data(:, num_columns);
@@ -76,7 +76,7 @@ for power_iteration = 1 : 5
     fprintf('mean precision == %f\n', mean_precision / k)
     fprintf('mean recall == %f\n', mean_recall / k)
     fprintf('mean f1 == %f\n', mean_f1 / k)
-    fflush(stdout)
+    fflush(stdout);
     mean_accuracy = 0;
     mean_precision = 0;
     mean_f1 = 0;

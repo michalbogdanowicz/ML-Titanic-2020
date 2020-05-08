@@ -4,8 +4,9 @@ clear; close all; clc
 %% Load Data
 fprintf('Loading data ...\n');
 X = load('C:\Users\ilCONDOR\Dropbox\unibz\Semester2\Machine_Learning\Project\repo\Logistic_Regression\titanic_numerical_clean.csv');
-n = length(X(1,:));
-Y = X(:,n);
+n = length(X(1,:))-1;
+Y = X(:,n+1);
+X = X(:,1:n);
 features = zeros(n,1);
 %==========================================================
 
@@ -19,6 +20,7 @@ pause;
 
 %% Plot model tree
 fprintf('\nPlotting model tree ...\n');
+% plotParam = m5pparams2('leaves');
 m5pplot(model); 
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
@@ -54,7 +56,7 @@ fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
 %% Predict
-P = ones(1,n);
+P = zeros(1,n);
 [Yq, contrib] = m5ppredict(model, P);
 fprintf('\nPrediction: %f\n', Yq(1));
 fprintf('Training set mean: %f\n', contrib(1,end));
@@ -74,11 +76,6 @@ model = m5pbuild(X, Y, params, features);
 m5pprint(model);
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
-
-%% 10-fold Cross-Validation
-fprintf('\n10-fold Cross-Validation ...\n');
-rng(1);
-results = m5pcv(X, Y, params, features)
 %==========================================================
 
 fprintf("=======END=========\n");

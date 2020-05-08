@@ -4,8 +4,9 @@ clear; close all; clc
 %% Load Data
 fprintf('Loading data ...\n');
 X = load('C:\Users\ilCONDOR\Dropbox\unibz\Semester2\Machine_Learning\Project\repo\Logistic_Regression\titanic_numerical_clean.csv');
-n = length(X(1,:));
-Y = X(:,n);
+n = length(X(1,:))-1;
+Y = X(:,n+1);
+X = X(:,1:n);
 features = zeros(n,1);
 %==========================================================
 
@@ -13,7 +14,7 @@ features = zeros(n,1);
 fprintf('\nGrowing ensembles of trees ...\n');
 params = m5pparams(false, 1, 4, false, 0, 0.05);
 
-nTrees = 10;
+nTrees = 5;
 numVarsTry = [-1,-1];
 paramsEnsemble = m5pparamsensemble(nTrees, numVarsTry, true, 1, false, true, 1, false, 0);
 
@@ -48,24 +49,13 @@ figure;
 bar(ensembleResults.varImportance(3,:) ./ ensembleResults.varImportance(4,:));
 xlabel('Variable number');
 ylabel('Variable importance');
-
-%% Forest Floor main effect plots
-%% figure;
-%% contrib = ensembleResults.OOBContrib;
-%% cminmax = [min(min(contrib(:,1:(end-1))))-0.5 max(max(contrib(:,1:(end-1))))+0.5];
-%% for i = 1 : size(X,2)
-%% subplot(n,5,i);
-%% scatter(X(:,i), contrib(:,i), 50, '.');
-%% ylim(cminmax); xlim([min(X(:,i)) max(X(:,i))]);
-%% xlabel(['x_{' num2str(i) '}']); box on;
-%% end
 %==========================================================
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
 %% Predict
 fprintf('\nPredicting ensembles of trees ...\n');
-P = ones(1,n);
+P = zeros(1,n);
 [Yq, contrib] = m5ppredict(model, P);
 fprintf('Prediction: %f\n', Yq(1));
 fprintf('In-bag mean: %f\n', contrib(1,end));

@@ -12,7 +12,9 @@ k = 10; # <---- K VALUE
 
 c = cvpartition(y, 'KFold', k)
 mean_accuracy = 0;
-
+mean_precision = 0;
+mean_f1 = 0;
+mean_recall = 0;
 # need to do in total 5 times for power that comes from x^1 to x^10.
 for power_iteration = 1 : 5
       fprintf('\n MAX POWER == %f\n', power_iteration)
@@ -49,12 +51,36 @@ for power_iteration = 1 : 5
     
     h = predict(theta,X);
     acc = sum(h == test_y)/length(test_y);
-    fprintf('Test Accuracy: %f\n', acc)
+    % make a matrix full of ones of the same size of the h or test_y
+    % get the positives 
+    true_positive = sum( test_y(test_y == 1) == h(test_y == 1));
+    false_positive = sum( test_y(h == 1) != h(h == 1));
+    false_negative = sum( test_y(h == 0) != h(h == 0));
+    % precision. 
+    % True positive / (True Positive + False Positive)
+    measure_precision = true_positive/( true_positive + false_positive);
+    % Recall
+    % True Positive / (True positive + False Negative)
+    recall = true_positive / (true_positive + false_negative);
+    %F1-measure
+    % 2 (Recall * Precision) / (recall + precision)
+    f1 =  (2 * recall * measure_precision) / (recall + measure_precision);
+
+    fprintf('Test %d Accuracy: %f\n', iteration ,acc)
     mean_accuracy = mean_accuracy + acc;
+    mean_precision = mean_precision + measure_precision;
+    mean_f1 = mean_f1 + f1;
+    mean_recall = mean_recall + recall;
   endfor
     fprintf('mean accuracy == %f\n', mean_accuracy / k)
+    fprintf('mean precision == %f\n', mean_precision / k)
+    fprintf('mean recall == %f\n', mean_recall / k)
+    fprintf('mean f1 == %f\n', mean_f1 / k)
     fflush(stdout)
     mean_accuracy = 0;
+    mean_precision = 0;
+    mean_f1 = 0;
+    mean_recall = 0;
 endfor
 
 #plotBoundry(theta,X,y,0);

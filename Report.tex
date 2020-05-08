@@ -1,5 +1,11 @@
 \documentclass{article}
-
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 \begin{document}
 
 \title{Titanic ML Project}
@@ -25,8 +31,8 @@ The methods that have been used are:
 
 \section{Data}
 
-The Data was incomplete. It was impossible to perform the best practices for evaluating a model. The test and training were arleady separated. So the complete dataset has been found. This can be tested by subimitting the predictions of the test to the kaggle.com site and the result will be 1.0 ( which is of course impossible, unless complete overfitting on full data is performed).
-
+The Data propsed to the professor was incomplete. It heavily reduced the avialble data to perform the best practices for evaluating a model. The test and training were already separated and ground truth was missing. So the complete dataset has been taken from the internet. In addition the complete list of surviors can be found at the wikipedia page \href{https://en.wikipedia.org/wiki/Passengers_of_the_RMS_Titanic}{here} (not a ML-friendly format).
+This data sadly is used to cheat on the kaggle competition. Making it a quite infamous one.
 
 
 \subsection{Subsection Heading Here}

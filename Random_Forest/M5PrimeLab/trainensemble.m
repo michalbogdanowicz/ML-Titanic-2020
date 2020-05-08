@@ -4,6 +4,7 @@ clear; close all; clc
 %% Load Data
 fprintf('Loading data ...\n');
 X = load('C:\Users\ilCONDOR\Dropbox\unibz\Semester2\Machine_Learning\Project\repo\Logistic_Regression\titanic_numerical_clean.csv');
+X = X(randperm(size(X, 1)), :);
 n = length(X(1,:))-1;
 Y = X(:,n+1);
 X = X(:,1:n);

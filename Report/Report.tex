@@ -2,6 +2,8 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{arrows,intersections}
+\usetikzlibrary{decorations.markings}
+
 \usepackage{amsmath} % Required for \varPsi below
 
 \hypersetup{
@@ -95,8 +97,8 @@ Since a lot of the data is a binary variable (0,1). The square of 0 and 1 comes 
 Procedure used for selecting the Logistic Regression model.
 
 \begin{enumerate}  
-\item Choose the maximum polynomial to use by comparing the measures obtained with Cross Valdation (CV) methodology. The data can be seen in Table
-\ref{tab:LR-Measures} 
+\item Tthe maximum polynomial wase chosen by comparing the measures obtained with Cross Valdation (CV) methodology. The data can be seen in Table
+\ref{tab:LR-Measures}. Maximim degree 2 has prevailed in most iterations. At each iteration the folds are randomized, and maximum degree 1 rarely beat 2.
 
 \begin{table}[]
 \centering
@@ -116,7 +118,7 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \end{tabular}
 \end{table}
 
-\item Check for Bias and variance by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the Graph \ref{Graph:LR-BV}
+\item Bias and variance was checkd by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the Graph \ref{Graph:LR-BV}, the cv and test MAE are very close. No Variance or Bias detected. 
 
 \begin{figure}
 \centering
@@ -142,11 +144,12 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \draw[->] (1,0) -- (1,0.7) node[anchor=east] {MAE};
 
 % Error Training
-\draw (1,0.18352) -- (2,0.18029) -- (3,0.27298)  -- (4,0.33461) -- (5, 0.58153);
+\draw plot [smooth] coordinates {(1,0.18352)  (2,0.18029)  (3,0.27298)   (4,0.33461)  (5, 0.58153)};
+
 \draw (2,0.140) node {$J(\theta )_t$}; %label
 
 % Error CV
-\draw (1,0.19481) -- (2,0.19101) -- (3,0.27659)  -- (4,0.33535) -- (5, 0.57908);
+\draw plot [smooth] coordinates {(1,0.19481)  (2,0.19101)  (3,0.27659)   (4,0.33535)  (5, 0.57908)};
 \draw (1.5,0.237) node {$J(\theta )_{cv}$}; %label
 
 \end{tikzpicture}
@@ -154,10 +157,50 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \caption{Plot of Errors with CV and Training}
 \end{figure}
 
-\item Check how the n. of training examples affects the quality of the model.
+\item Quality of the model was controlled with the contruction of the learning curve in \ref{Graph:LR-LearningCurve} to see if there was variance and more training samples were required. They were not, as the algotihm used in octave iteself states around 200 iteration that the step become too small to be worth consideration.
 \end{enumerate}
 
+\begin{figure}
+\centering
+\begin{tikzpicture}[y=10cm, x=0.05cm]
 
+% horizontal axis
+\draw[->] (1,0) -- (200,0) node[anchor=north] {};
+% labels
+\draw	(0,0) node[anchor=north] {0}
+		(50,0) node[anchor=north] {50}
+		(100,0) node[anchor=north] {100}
+		(150,0) node[anchor=north] {150}
+		(200,0) node[anchor=north] {200};
+
+\draw	(1,0.1) node[anchor=east] {0.1}
+		(1,0.2) node[anchor=east] {0.2}
+		(1,0.3) node[anchor=east] {0.3}
+		(1,0.4) node[anchor=east] {0.4}
+		(1,0.5) node[anchor=east] {0.5}
+		(1,0.6) node[anchor=east] {0.6};
+
+% vertical axis
+\draw[->] (1,0) -- (1,0.7) node[anchor=east] {MAE};
+
+% Error Training
+\draw (100,0.15) node {$J(\theta )_t$}; %label
+
+\draw plot [smooth] coordinates {(5,0.61803)  (10,0.36619)  (25,0.34233)   (50,0.28343)  (100, 0.18589)(125, 0.18267)(135, 0.18216)(150, 0.18139)(190, 0.18088)};
+
+% Error CV
+
+\draw (100,0.260) node {$J(\theta )_{cv}$}; %label
+
+\draw plot [smooth] coordinates {(5,0.61803)  (10,0.37738)  (25,0.34228)   (50,0.27804)  (100, 0.22609)(125, 0.18561)(135, 0.18868)(150, 0.18792)(190, 0.18867)};
+
+\end{tikzpicture}
+\label{Graph:LR-LearningCurve}
+\caption{Logistic Regression Learning Curve for Max degree pol. == 2}
+\end{figure}
+
+\subsection{Chosen model.}
+Every feature + other 4 features containing elevated to the second power were chosen. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustement step would be meaningless).
 
 \section{Decision trees and random forest}
 \subsection{Introduction to decision trees}

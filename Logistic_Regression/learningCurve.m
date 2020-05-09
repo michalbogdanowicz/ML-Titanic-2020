@@ -24,12 +24,16 @@ y = data(:, num_columns);
 k = 10; # <---- K VALUE
 
 c = cvpartition(y, 'KFold', k)
-
+training_examples_vector = [5,10,25,50,75,100,125,135,150,165,172,190]
+DATA_FOR_LEARNING_CURVE = zeros(3,columns(training_examples_vector));
 plottable_error_on_pol_degree = zeros(2,5);
+index = 0;
+fprintf('\n MAX POWER == %f\n', 2)
 
 # need to do in total 5 times for power that comes from x^1 to x^10.
-for training_examples = [5,10,25,50,75,100,125,135,150,190]
-      fprintf('\n MAX POWER == %f\n', 2)
+for training_examples = training_examples_vector
+index = index + 1;
+DATA_FOR_LEARNING_CURVE(1,index) = training_examples_vector(index);
 
   for iteration = 1:k
   
@@ -124,10 +128,10 @@ endfor
     fprintf('mse == %.3f\n', mean_mse / k)
     fprintf('rae == %.3f\n', mean_rae / k)
     fprintf('rse == %.3f\n', mean_rse / k)
+    DATA_FOR_LEARNING_CURVE(2,index) = mean_mae_training/ k;
+    DATA_FOR_LEARNING_CURVE(3,index) =  mean_mae /k ;
     fflush(stdout);
-    
-    graph_data_CV_training_ERROR(1,2) = mean_mae_training/ k;
-    graph_data_CV_training_ERROR(2,2) = mean_mae /k ;
+    DATA_FOR_LEARNING_CURVE
     mean_accuracy = 0;
     mean_precision = 0;
     mean_f1 = 0;
@@ -138,6 +142,9 @@ endfor
     mean_rse= 0;
     mean_mae_training= 0;
 endfor
+
+fprintf('second row is the training mae')
+fprintf('third row is the cv mae')
 
 %plot([1,2,3,4,5],graph_data_CV_training_ERROR(1,:), [1,2,3,4,5],graph_data_CV_training_ERROR(2,:))
 

@@ -1,5 +1,9 @@
 \documentclass{article}
 \usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows,intersections}
+\usepackage{amsmath} % Required for \varPsi below
+
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -88,6 +92,37 @@ This is the procedure that has been used to select the model.
 \item Check for Bias and variance by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial
 \item Choose the regularization parameter that reducces the CV Error the most by using the polynomial choseon and Lambda going from 0.01 to 5.
 \end{enumerate}
+\begin{tikzpicture}[y=10cm, x=2.5cm]
+
+% horizontal axis
+\draw[->] (1,0) -- (5,0) node[anchor=north] {};
+% labels
+\draw	(1,0) node[anchor=north] {1}
+		(2,0) node[anchor=north] {2}
+		(3,0) node[anchor=north] {3}
+		(4,0) node[anchor=north] {4}
+		(5,0) node[anchor=north] {5};
+
+\draw	(1,0.1) node[anchor=east] {0.1}
+		(1,0.2) node[anchor=east] {0.2}
+		(1,0.3) node[anchor=east] {0.3}
+		(1,0.4) node[anchor=east] {0.4}
+		(1,0.5) node[anchor=east] {0.5}
+		(1,0.6) node[anchor=east] {0.6};
+
+% vertical axis
+\draw[->] (1,0) -- (1,0.7) node[anchor=east] {MAE};
+
+% Error Training
+\draw (1,0.18352) -- (2,0.18029) -- (3,0.27298)  -- (4,0.33461) -- (5, 0.58153);
+\draw (1.5,0.3) node {$J(\theta )_{cv}$}; %label
+
+% Error CV
+\draw (1,0.19481) -- (2,0.19101) -- (3,0.27659)  -- (4,0.33535) -- (5, 0.57908);
+\draw (1.7,0.075) node {$J(\theta )_t$}; %label
+
+\end{tikzpicture}
+
 
 \section{Decision trees and random forest}
 \subsection{Introduction to decision trees}

@@ -1,9 +1,18 @@
 %% Clear and Close Figures
 clear; close all; clc
-
+%% declaration of variables
+mean_accuracy = 0;
+mean_precision = 0;
+mean_f1 = 0;
+mean_recall = 0;
+mean_mae = 0;
+mean_mse = 0;
+mean_rae = 0;
+mean_rse= 0;
 fprintf('Loading data ...\n');
 %% Load Data
 data = load('titanic_numerical_clean.csv');
+% Randomize the rows. The data is ordered by something.
 data = data(randperm(size(data, 1)), :);
 %==========================================================
 num_columns = columns(data)
@@ -11,10 +20,9 @@ y = data(:, num_columns);
 k = 10; # <---- K VALUE
 
 c = cvpartition(y, 'KFold', k)
-mean_accuracy = 0;
-mean_precision = 0;
-mean_f1 = 0;
-mean_recall = 0;
+
+
+
 # need to do in total 5 times for power that comes from x^1 to x^10.
 for power_iteration = 1 : 5
       fprintf('\n MAX POWER == %f\n', power_iteration)
@@ -50,37 +58,67 @@ for power_iteration = 1 : 5
     X = generateModel(test_X, power_iteration);
     
     h = predict(theta,X);
+    
+    %%%% MEASURES START %%%%
     acc = sum(h == test_y)/length(test_y);
-    % make a matrix full of ones of the same size of the h or test_y
-    % get the positives 
+    
+    
+    % Mean Absolute Error
+    mae = sum(abs(test_y - h))/length(test_y);
+    % Mean Squared Error
+    mse = sum( (test_y - h).^2)/length(test_y);
+    % Relative Absolute Error
+    ground_truth_mean = sum(test_y)/length(test_y);
+    rae = sum( abs(test_y - h))/sum(abs(test_y - ground_truth_mean));
+    % Relative Squared Error
+    rse = sum( (test_y - h).^2)/sum((test_y - ground_truth_mean).^2);
+
     true_positive = sum( test_y(test_y == 1) == h(test_y == 1));
     false_positive = sum( test_y(h == 1) != h(h == 1));
     false_negative = sum( test_y(h == 0) != h(h == 0));
+    
     % precision. 
     % True positive / (True Positive + False Positive)
     measure_precision = true_positive/( true_positive + false_positive);
+    
     % Recall
     % True Positive / (True positive + False Negative)
     recall = true_positive / (true_positive + false_negative);
+    
     %F1-measure
     % 2 (Recall * Precision) / (recall + precision)
     f1 =  (2 * recall * measure_precision) / (recall + measure_precision);
-
-    fprintf('Test %d Accuracy: %f\n', iteration ,acc)
+    
+    %fprintf('Test %d Accuracy: %f\n', iteration ,acc)
     mean_accuracy = mean_accuracy + acc;
     mean_precision = mean_precision + measure_precision;
     mean_f1 = mean_f1 + f1;
     mean_recall = mean_recall + recall;
-  endfor
-    fprintf('mean accuracy == %f\n', mean_accuracy / k)
-    fprintf('mean precision == %f\n', mean_precision / k)
-    fprintf('mean recall == %f\n', mean_recall / k)
-    fprintf('mean f1 == %f\n', mean_f1 / k)
+    mean_mae = mean_mae + mae;
+    mean_mse = mean_mse + mse;
+    mean_rae = mean_rae + rae;
+    mean_rse = mean_rse + rse;
+    %%%% MEASURES END %%%%
+
+endfor
+    fprintf('mean values across folds\n')
+    fprintf('accuracy == %f\n', mean_accuracy / k)
+    fprintf('precision == %f\n', mean_precision / k)
+    fprintf('recall == %f\n', mean_recall / k)
+    fprintf('f1 == %f\n', mean_f1 / k)
+    fprintf('mae == %f\n', mean_mae / k)
+    fprintf('mse == %f\n', mean_mse / k)
+    fprintf('rae == %f\n', mean_rae / k)
+    fprintf('rse == %f\n', mean_rse / k)
     fflush(stdout);
     mean_accuracy = 0;
     mean_precision = 0;
     mean_f1 = 0;
     mean_recall = 0;
+    mean_mae = 0;
+    mean_mse = 0;
+    mean_rae = 0;
+    mean_rse= 0;
 endfor
 
 #plotBoundry(theta,X,y,0);

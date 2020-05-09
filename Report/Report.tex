@@ -25,7 +25,7 @@ The methods that have been used are:
 
 \begin{enumerate}  
 \item Logistic Regression TODO
-\item Random trees TODO
+\item Decision trees and Random Forest
 \item Neural Networks TODO
 \end{enumerate}
 
@@ -87,6 +87,68 @@ This is the procedure that has been used to select the model.
 \item Choose the regularization parameter that reducces the CV Error the most by using the polynomial choseon and Lambda going from 0.01 to 5.
 \end{enumerate}
 
+\section{Decision trees and random forest}
+\subsection{Introduction to decision trees}
+A decision tree builds upon iteratively asking questions to partition data.
+Our aim is to increase the predictiveness of the model as much as possible at each partitioning so that the model keeps gaining information about the dataset.
+There are two ways to measure the quality of a split:
+\begin{enumerate}
+	\item Gini-Index: The measure is about the impurity of a node. The aim is to reduce the impurity (reduce randomness) of data to achieve correct classification (labeling).
+	\item Information Gain (Entropy):
+	The information gain is the difference between entropy before and after the split.
+	When splitting decision trees try to be more predictive, less impure and reduce entropy. Entropy is a measure of uncertainty or randomness. The more randomness a variable (feature) has, the higher the entropy is.  
+\end{enumerate}
+
+\subsection{Introduction to random forests}
+Random forest is an ensemble of many decision trees. Random forests are built using a method called bagging in which each decision tree is used as parallel estimator.
+Random forests reduce the risk of overfitting and accuracy is much higher than a single decision tree. Furthermore, decision trees in a random forest run in parallel so that the time does not become a bottleneck.
+
+
+\subsection{Procedure}
+We used the M5PrimeLab Octave toolbox as follows:
+\begin{enumerate}  
+	\item Normalize data introducing Dummy Variables and transform feature in numerical data
+	\item Build and plot the decision tree to inspect generated number of rules
+	\item Use 10-fold Cross Validation to calculate the key indicators MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
+	\item Build and plot the precision tree to inspect generated number of rules
+	\item Use 10-fold Cross Validation on precision tree to calculate the key indicators MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
+	\item Calculate prediction, training set mean and input variable contributions
+	\item Extract the decision rules from the tree
+	\item Build tree forest (ensemble) 
+	\item Calculate the out-of-bag Mean Squared Error (MSE) 
+	\item Plot the variable importance
+	\item Predict the forest
+	\item Use 10-fold Cross Validation to evaluate the predictive performance of the forest
+\end{enumerate}
+
+\subsection{Results}
+TODO
+
+\subsection{Lesson learned}
+\subsubsection{Advantages of Decision Trees}
+\begin{enumerate}
+	\item No normalization or scaling of features
+	\item Suitable for mixed feature data types
+	\item Easy results interpretation
+\end{enumerate}
+
+\subsubsection{Disadvantages of Random Trees}
+\begin{enumerate}
+\item Prone to overfit and need to build forests to get good results
+\end{enumerate}
+
+\subsubsection{Advantages of Random Forests}
+\begin{enumerate}
+	\item Powerful, highly accurate model on many different problems
+	\item No normalization or scaling of features
+	\item Suitable for mixed feature data types
+	\item Parallel computation for stable performance
+\end{enumerate}
+
+\subsubsection{Disadvantages of Random Forests}
+\begin{enumerate}
+	\item Not a good choice for high-dimensional data
+\end{enumerate}
 
 
 \section{Conclusion}

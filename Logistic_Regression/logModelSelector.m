@@ -114,15 +114,15 @@ for power_iteration = 1 : 5
 
 endfor
     fprintf('mean values across folds\n')
-     printf('training mae == %f\n', mean_mae_training / k)
-    fprintf('accuracy == %f\n', mean_accuracy / k)
-    fprintf('precision == %f\n', mean_precision / k)
-    fprintf('recall == %f\n', mean_recall / k)
-    fprintf('f1 == %f\n', mean_f1 / k)
-    fprintf('mae == %f\n', mean_mae / k)
-    fprintf('mse == %f\n', mean_mse / k)
-    fprintf('rae == %f\n', mean_rae / k)
-    fprintf('rse == %f\n', mean_rse / k)
+     printf('training mae == %.3f\n', mean_mae_training / k)
+    fprintf('accuracy == %.3f\n', mean_accuracy / k)
+    fprintf('precision == %.3f\n', mean_precision / k)
+    fprintf('recall == %.3f\n', mean_recall / k)
+    fprintf('f1 == %.3f\n', mean_f1 / k)
+    fprintf('mae == %.3f\n', mean_mae / k)
+    fprintf('mse == %.3f\n', mean_mse / k)
+    fprintf('rae == %.3f\n', mean_rae / k)
+    fprintf('rse == %.3f\n', mean_rse / k)
     fflush(stdout);
     
     graph_data_CV_training_ERROR(1,power_iteration) = mean_mae_training/ k;

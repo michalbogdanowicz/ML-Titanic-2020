@@ -11,6 +11,8 @@ mean_rae = 0;
 mean_rse= 0;
 mean_mae_training = 0;
 
+graph_data_CV_training_ERROR = zeros(5,2);
+
 fprintf('Loading data ...\n');
 %% Load Data
 data = load('titanic_numerical_clean.csv');
@@ -122,6 +124,9 @@ endfor
     fprintf('rae == %f\n', mean_rae / k)
     fprintf('rse == %f\n', mean_rse / k)
     fflush(stdout);
+    
+    graph_data_CV_training_ERROR(1,power_iteration) = mean_mae_training/ k;
+    graph_data_CV_training_ERROR(2,power_iteration) = mean_mae /k ;
     mean_accuracy = 0;
     mean_precision = 0;
     mean_f1 = 0;
@@ -133,7 +138,9 @@ endfor
     mean_mae_training= 0;
 endfor
 
-#plotBoundry(theta,X,y,0);
+plot([1,2,3,4,5],graph_data_CV_training_ERROR(1,:), [1,2,3,4,5],graph_data_CV_training_ERROR(2,:))
+
+%plotBoundry(theta,X,y,0);
 
 % fprintf('\nProgram paused. Press enter to continue.\n');
 %%%%========================================================================

@@ -56,8 +56,7 @@ fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
 %% Predict
-P = zeros(1,n);
-[Yq, contrib] = m5ppredict(model, P);
+[Yq, contrib] = m5ppredict(model, X);
 fprintf('\nPrediction: %f\n', Yq(1));
 fprintf('Training set mean: %f\n', contrib(1,end));
 fprintf('Input variable contributions:\n');

@@ -116,12 +116,12 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \end{tabular}
 \end{table}
 
-\item Check for Bias and variance by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the graph \ref{Graph:LR-BV}
+\item Check for Bias and variance by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the Graph \ref{Graph:LR-BV}
 
-
-\begin{tikzpicture}[y=10cm, x=2.5cm]
-\label{Graph:LR-BV}
+\begin{figure}
 \centering
+\begin{tikzpicture}[y=10cm, x=2.5cm]
+
 % horizontal axis
 \draw[->] (1,0) -- (5,0) node[anchor=north] {};
 % labels
@@ -150,8 +150,11 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \draw (1.7,0.075) node {$J(\theta )_t$}; %label
 
 \end{tikzpicture}
+\label{Graph:LR-BV}
+\caption{Plot of Errors with CV and Training}
+\end{figure}
 
-\item Choose the regularization parameter that reducces the CV Error the most by using the polynomial choseon and Lambda going from 0.01 to 5.
+\item Check how the n. of training examples affects the quality of the model.
 \end{enumerate}
 
 

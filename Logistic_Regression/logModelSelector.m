@@ -9,19 +9,21 @@ mean_mae = 0;
 mean_mse = 0;
 mean_rae = 0;
 mean_rse= 0;
+mean_mae_training = 0;
+
 fprintf('Loading data ...\n');
 %% Load Data
 data = load('titanic_numerical_clean.csv');
-% Randomize the rows. The data is ordered by something.
+% Randomize the rows. The data is ordered by something. And this created "unfair" folds.
 data = data(randperm(size(data, 1)), :);
 %==========================================================
-num_columns = columns(data)
+num_columns = columns(data);
 y = data(:, num_columns);
 k = 10; # <---- K VALUE
 
 c = cvpartition(y, 'KFold', k)
 
-
+plottable_error_on_pol_degree = zeros(2,5);
 
 # need to do in total 5 times for power that comes from x^1 to x^10.
 for power_iteration = 1 : 5
@@ -50,14 +52,20 @@ for power_iteration = 1 : 5
     options = optimset( 'GradObj','on','MaxIter' , 400);
     % call fminunc
     [theta, cost] = fminunc(@(t)(costFunction(t, X, train_y)), t_init, options);
-
+    hypothesis_training = predict(theta,X);
+    mae_training = sum(abs(train_y - hypothesis_training))/length(train_y);
+    
     test_y = test_data(:, num_columns);
 
     m = length(test_y);
     test_X = test_data(:, 1:num_columns-1);
-    X = generateModel(test_X, power_iteration);
+    %% values in the test_X that have only 0 or 1 will not be elevated to a power.
+    %% as it would just duplicate the same exact feature.
     
-    h = predict(theta,X);
+    test_model_X = generateModel(test_X, power_iteration);
+    
+    h = predict(theta,test_model_X);
+    
     
     %%%% MEASURES START %%%%
     acc = sum(h == test_y)/length(test_y);
@@ -98,10 +106,13 @@ for power_iteration = 1 : 5
     mean_mse = mean_mse + mse;
     mean_rae = mean_rae + rae;
     mean_rse = mean_rse + rse;
+    mean_mae_training = mean_mae_training + mae_training;
+
     %%%% MEASURES END %%%%
 
 endfor
     fprintf('mean values across folds\n')
+     printf('training mae == %f\n', mean_mae_training / k)
     fprintf('accuracy == %f\n', mean_accuracy / k)
     fprintf('precision == %f\n', mean_precision / k)
     fprintf('recall == %f\n', mean_recall / k)
@@ -119,6 +130,7 @@ endfor
     mean_mse = 0;
     mean_rae = 0;
     mean_rse= 0;
+    mean_mae_training= 0;
 endfor
 
 #plotBoundry(theta,X,y,0);

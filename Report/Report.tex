@@ -8,13 +8,13 @@
 }
 \begin{document}
 
-\title{Titanic ML Project}
+\title{Titanic - ML Project}
 \author{Bogdanowicz Michal Kamil, Geraci Luca}
 
 \maketitle
 
 \begin{abstract}
-The abstract text goes here.
+Report of the project for the course of ML 2019/2020
 \end{abstract}
 
 
@@ -78,6 +78,8 @@ The data cannot be used as it is.
 The names are going to be deleted, as that should not inlfuence the resut.
 
 \section{Logistic Regression}
+One important remark. Since a lot of the data is a binary variable (0,1). The square of 0 and 1 comes back to the same value. That means that eleveting features which have only values 0 and 1 adds nothing to the model. Even more, it adds a fully correlated feature. Which has a negative impact on the model (even though it has not been the case empirically for this model. The reasons seems to be that the ensuring overestimation has no effect on the final result. The reasoning used still stands : Avoid correlated features for ML).
+\\
 This is the procedure that has been used to select the model.
 
 \begin{enumerate}  

@@ -10,6 +10,10 @@
     filecolor=magenta,      
     urlcolor=cyan,
 }
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+
 \begin{document}
 
 \title{Titanic - ML Project}
@@ -159,7 +163,18 @@ We used the M5PrimeLab Octave toolbox as follows:
 \end{enumerate}
 
 \subsection{Results}
-TODO
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[a]{0.55\textwidth}
+		\includegraphics[width=1\linewidth]{decision_tree.png}
+		\caption{decision tree}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.55\textwidth}
+		\includegraphics[width=1\linewidth]{precision_tree.png}
+		\caption{precision tree}
+	\end{subfigure}
+\end{figure}
 
 \subsection{Lesson learned}
 \subsubsection{Advantages of Decision Trees}

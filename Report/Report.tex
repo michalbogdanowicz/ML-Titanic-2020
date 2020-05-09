@@ -191,9 +191,83 @@ We used the M5PrimeLab Octave toolbox as follows:
 \end{enumerate}
 
 \subsection{Results}
+The M5 algorithm generated 163 different rules using 13 variables.
+\break \bigskip After 10-fold Cross Validation the number of rules lowered to 71.
+
+\bigskip
+Following Measures are collected:
+\begin{itemize}
+	\item MAE (Mean Absolute Error)
+	\item MSE (Mean Squared Error)
+	\item RMSE (Root Mean Squared Error)
+	\item RRMSE (Relative Root Mean Squared Error)
+	\item R2 (Coefficient of Determination)
+	\item nRules (Mean Number of Rules)
+	\item nVars (Mean Number of Variables)
+\end{itemize}
+
+\begin{table}[H]
+	\centering
+	\caption{Result running 10-fold Cross Validation on Decision Tree}
+	\label{tab:Key-Indicator-DT}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Measure} & \textbf{Value} \\ \hline
+		MAE       		& 0.23878 \\ \hline
+		MSE       		& 0.18681 \\ \hline
+		RMSE       		& 0.43123 \\ \hline
+		RRMSE       	& 0.88923 \\ \hline
+		R2       		& 0.20563 \\ \hline
+		nRules       	& 146.60  \\ \hline
+		nVars       	& 12.500  \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Result running 10-fold Cross Validation on Precision Tree}
+	\label{tab:Key-Indicator-PT}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Measure} 	& \textbf{Value} \\ \hline
+		MAE       			& 0.23908 		 \\ \hline
+		MSE       			& 0.18327 		 \\ \hline
+		RMSE       			& 0.42722		 \\ \hline
+		RRMSE       		& 0.88093 	  	 \\ \hline
+		R2       			& 0.22085  	 	 \\ \hline
+		nRules       		& 148.10   		 \\ \hline
+		nVars       		& 12.500   		 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Result Prediction}
+	\label{tab:Result-Prediction}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Measure}    & \textbf{Value} \\ \hline
+		Prediction       	& 1.000000 	  	 \\ \hline
+		Training set mean   & 0.381971 	  	 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Input variable contributions}
+	\label{tab:Variable-Contribution}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Variable}   & \textbf{Contribution}	\\ \hline
+		x17	       			& 0.301000 				\\ \hline
+		x26	       			& 0.196754 				\\ \hline
+		x1	       			& 0.165289 				\\ \hline
+		x4	       			& -0.069883				\\ \hline
+		x20	       			& 0.024869 				\\ \hline
+	\end{tabular}
+\end{table}
 
 \newpage
-\vfill
 \begin{sidewaysfigure}[h]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{decision_tree.png}
 	\caption{decision tree}
@@ -203,11 +277,8 @@ We used the M5PrimeLab Octave toolbox as follows:
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{precision_tree.png}
 	\caption{precision tree}
 \end{sidewaysfigure}
-\vfill
 \clearpage
 
-
-	
 \subsection{Lesson learned}
 \subsubsection{Advantages of Decision Trees}
 \begin{enumerate}
@@ -233,7 +304,6 @@ We used the M5PrimeLab Octave toolbox as follows:
 \begin{enumerate}
 	\item Not a good choice for high-dimensional data
 \end{enumerate}
-
 
 \section{Conclusion}
 Write your conclusion here.

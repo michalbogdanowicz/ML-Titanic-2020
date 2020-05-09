@@ -196,11 +196,11 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 
 \end{tikzpicture}
 \label{Graph:LR-LearningCurve}
-\caption{Logistic Regression Learning Curve for Max degree pol. == 2}
+\caption{Logistic Regression Learning Curve for Max degree pol. = 2}
 \end{figure}
 
 \subsection{Chosen model.}
-Every feature + other 4 features containing elevated to the second power were chosen. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustement step would be meaningless).
+Every feature + the features not having only 0's and 1's elevated to the second power. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustement step would be meaningless).
 
 \section{Decision trees and random forest}
 \subsection{Introduction to decision trees}

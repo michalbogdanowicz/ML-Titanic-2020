@@ -86,18 +86,42 @@ The data cannot be used as it is.
 The names are going to be deleted, as that should not inlfuence the resut.
 
 \section{Logistic Regression}
-One important remark. Since a lot of the data is a binary variable (0,1). The square of 0 and 1 comes back to the same value. That means that eleveting features which have only values 0 and 1 adds nothing to the model. Even more, it adds a fully correlated feature. Which has a negative impact on the model (even though it has not been the case empirically for this model. The reasons seems to be that the ensuring overestimation has no effect on the final result. The reasoning used still stands : Avoid correlated features for ML).
+\subsection{Remark}
+
+Since a lot of the data is a binary variable (0,1). The square of 0 and 1 comes back to the same value. That means that eleveting features which have only values 0 and 1 adds nothing to the model. Even more, it adds a fully correlated feature. Which has a negative impact on the model (even though it has not been the case empirically for this model. The reasons seems to be that the ensuring overestimation has no effect on the final result. The reasoning used still stands : Avoid correlated features for ML).
 \\
-This is the procedure that has been used to select the model.
+\subsection{Procedure}
+
+Procedure used for selecting the Logistic Regression model.
 
 \begin{enumerate}  
-\item Choose the maximum polynomial to use by comparing the measures with CV (Cross Validation)
+\item Choose the maximum polynomial to use by comparing the measures obtained with Cross Valdation (CV) methodology. The data can be seen in Table
+\ref{tab:LR-Measures} 
 
-\item Check for Bias and variance by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial
-\item Choose the regularization parameter that reducces the CV Error the most by using the polynomial choseon and Lambda going from 0.01 to 5.
-\end{enumerate}
+\begin{table}[]
+\centering
+\caption{Polynomial degree measures comparison}
+\label{tab:LR-Measures}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+Measure/Degree  & 1     & \textbf{2}     & 3     & 4     & 5     \\ \hline
+Accuracy  		& 0.804 & \textbf{0.810} & 0.717 & 0.662 & 0.437 \\ \hline
+Precision		& 0.754 & \textbf{0.760} & 0.683 & 0.631 & 0.399 \\ \hline
+Recall    		& 0.728 & \textbf{0.738} & 0.436 & 0.286 & 0.896 \\ \hline
+F1        		& 0.738 & \textbf{0.746} & 0.515 & 0.390 & 0.534 \\ \hline
+MAE       		& 0.196 & \textbf{0.190} & 0.283 & 0.338 & 0.563 \\ \hline
+MSE       		& 0.196 & \textbf{0.190} & 0.283 & 0.338 & 0.563 \\ \hline
+RAE       		& 0.414 & \textbf{0.403} & 0.599 & 0.715 & 1.193 \\ \hline
+RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
+\end{tabular}
+\end{table}
+
+\item Check for Bias and variance by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the graph \ref{Graph:LR-BV}
+
+
 \begin{tikzpicture}[y=10cm, x=2.5cm]
-
+\label{Graph:LR-BV}
+\centering
 % horizontal axis
 \draw[->] (1,0) -- (5,0) node[anchor=north] {};
 % labels
@@ -126,6 +150,10 @@ This is the procedure that has been used to select the model.
 \draw (1.7,0.075) node {$J(\theta )_t$}; %label
 
 \end{tikzpicture}
+
+\item Choose the regularization parameter that reducces the CV Error the most by using the polynomial choseon and Lambda going from 0.01 to 5.
+\end{enumerate}
+
 
 
 \section{Decision trees and random forest}

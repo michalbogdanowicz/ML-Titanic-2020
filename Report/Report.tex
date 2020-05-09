@@ -12,7 +12,8 @@
 }
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{subcaption}
+\usepackage[margin=1in]{geometry}
+\usepackage{rotating}
 
 \begin{document}
 
@@ -192,18 +193,20 @@ We used the M5PrimeLab Octave toolbox as follows:
 
 \subsection{Results}
 
-\begin{figure}[h]
+\newpage
+\vfill
+\begin{sidewaysfigure}[h]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{decision_tree.png}
+	\caption{decision tree}
+\end{sidewaysfigure}	
+\begin{sidewaysfigure}[h]
 	\centering
-	\begin{subfigure}[a]{0.55\textwidth}
-		\includegraphics[width=1\linewidth]{decision_tree.png}
-		\caption{decision tree}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.55\textwidth}
-		\includegraphics[width=1\linewidth]{precision_tree.png}
-		\caption{precision tree}
-	\end{subfigure}
-\end{figure}
-
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{precision_tree.png}
+	\caption{precision tree}
+\end{sidewaysfigure}
+\vfill
+\clearpage
+	
 \subsection{Lesson learned}
 \subsubsection{Advantages of Decision Trees}
 \begin{enumerate}

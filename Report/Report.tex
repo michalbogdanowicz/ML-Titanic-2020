@@ -120,6 +120,11 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 
 \item Bias and variance was checkd by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the Graph \ref{Graph:LR-BV}, the cv and test MAE are very close. No Variance or Bias detected. 
 
+
+\item Quality of the model was controlled with the contruction of the learning curve in Graph \ref{Graph:LR-LearningCurve} to see if there was variance and more training samples were required. They were not, as the algotihm used in octave iteself states around 200 iteration that the step become too small to be worth consideration.
+\end{enumerate}
+
+
 \begin{figure}
 \centering
 \begin{tikzpicture}[y=10cm, x=2.5cm]
@@ -153,12 +158,9 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \draw (1.5,0.237) node {$J(\theta )_{cv}$}; %label
 
 \end{tikzpicture}
-\label{Graph:LR-BV}
 \caption{Plot of Errors with CV and Training}
+\label{Graph:LR-BV}
 \end{figure}
-
-\item Quality of the model was controlled with the contruction of the learning curve in \ref{Graph:LR-LearningCurve} to see if there was variance and more training samples were required. They were not, as the algotihm used in octave iteself states around 200 iteration that the step become too small to be worth consideration.
-\end{enumerate}
 
 \begin{figure}
 \centering
@@ -195,8 +197,9 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \draw plot [smooth] coordinates {(5,0.61803)  (10,0.37738)  (25,0.34228)   (50,0.27804)  (100, 0.22609)(125, 0.18561)(135, 0.18868)(150, 0.18792)(190, 0.18867)};
 
 \end{tikzpicture}
-\label{Graph:LR-LearningCurve}
 \caption{Logistic Regression Learning Curve for Max degree pol. = 2}
+\label{Graph:LR-LearningCurve}
+
 \end{figure}
 
 \subsection{Chosen model.}

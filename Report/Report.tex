@@ -360,8 +360,45 @@ Following Measures are collected:
 	\item Not a good choice for high-dimensional data
 \end{enumerate}
 
+\section{Neural Network}
+skt-learn
+
+Without scaling the module reached the limit of 200 execution. And the values
+were not optimal: 
+Thesere the results 
+
+\begin{table}[]
+\caption{Rows = num hidden layers, Columns = size of hidden layers. Without scaling.}
+\label{tab:sklearn-NoScaling}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+           & 22       & 23       & 24       & 25       & 26       & 27       & \textbf{28}       & 29       & 30       & 31       & 32       \\ \hline
+1          & 0.618074 & 0.780769 & 0.809008 & 0.648620 & 0.381926 & 0.618074 & 0.358250          & 0.812049 & 0.618074 & 0.618074 & 0.772378 \\ \hline
+\textbf{2} & 0.385737 & 0.326935 & 0.618074 & 0.794480 & 0.806729 & 0.618074 & \textbf{0.812836} & 0.579841 & 0.809019 & 0.322337 & 0.458362 \\ \hline
+3          & 0.618074 & 0.789888 & 0.455320 & 0.792989 & 0.615772 & 0.618074 & 0.798303          & 0.336101 & 0.618074 & 0.618074 & 0.618074 \\ \hline
+4          & 0.760141 & 0.805208 & 0.499607 & 0.780023 & 0.614245 & 0.618074 & 0.802883          & 0.619607 & 0.802913 & 0.618074 & 0.804433 \\ \hline
+5          & 0.618074 & 0.752507 & 0.779988 & 0.792948 & 0.801386 & 0.574486 & 0.778426          & 0.368955 & 0.804445 & 0.625708 & 0.799853 \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\caption{Kllearn with Gradient Solver. Rows = amount of hidden layers. Columsn = amount nodes per layer. The most accurate model in this scenario is the one with 3 hidden layers and 28 nodes each}
+\label{tab:Experiment_Scaled_Gradient}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+           & 21       & 22       & 23       & 24       & 25       & 26       & 27       & \textbf{28}       & 29       & 30       & 31       \\ \hline
+1          & 0.806723 & 0.803664 & 0.803676 & 0.807493 & 0.805972 & 0.806735 & 0.805966 & 0.805197          & 0.809025 & 0.806729 & 0.814363 \\ \hline
+2          & 0.807493 & 0.809025 & 0.805208 & 0.809777 & 0.807504 & 0.811304 & 0.802901 & 0.812090          & 0.811321 & 0.810558 & 0.812079 \\ \hline
+\textbf{3} & 0.805191 & 0.809783 & 0.806729 & 0.807475 & 0.807475 & 0.809777 & 0.803664 & \textbf{0.816676} & 0.808262 & 0.810564 & 0.804451 \\ \hline
+4          & 0.808268 & 0.800622 & 0.812079 & 0.809794 & 0.805948 & 0.809789 & 0.805203 & 0.811315          & 0.802149 & 0.808256 & 0.804439 \\ \hline
+5          & 0.806729 & 0.797557 & 0.807499 & 0.810546 & 0.809783 & 0.805191 & 0.808256 & 0.802149          & 0.806735 & 0.807499 & 0.805966 \\ \hline
+\end{tabular}
+\end{table}
+
+
 
 \section{Conclusion}
 Write your conclusion here.
 
 \end{document}
+

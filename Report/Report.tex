@@ -224,16 +224,17 @@ Random forest is an ensemble of many decision trees. Random forests are built us
 Random forests reduce the risk of overfitting and accuracy is much higher than a single decision tree. Furthermore, decision trees in a random forest run in parallel so that the time does not become a bottleneck.
 
 
-\subsection{Procedure}
+\subsection{Procedure for Decision Tree}
 We used the M5PrimeLab Octave toolbox as follows:
 \begin{enumerate}  
 	\item Normalize data introducing Dummy Variables and transform feature in numerical data
-	\item Build and plot the decision tree to inspect generated number of rules
-	\item Use 10-fold Cross Validation to calculate the key indicators MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
-	\item Build and plot the precision tree to inspect generated number of rules
-	\item Use 10-fold Cross Validation on precision tree to calculate the key indicators MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
+	\item Build and plot the model tree
+	\item Use 10-fold Cross Validation on model tree to calculate MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
+	\item Build and plot the regression tree
+	\item Use 10-fold Cross Validation on regression tree to calculate MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
 	\item Calculate prediction, training set mean and input variable contributions
 	\item Extract the decision rules from the tree
+	\item Use 10-fold Cross Validation on decision rules to calculate MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
 	\item Build tree forest (ensemble) 
 	\item Calculate the out-of-bag Mean Squared Error (MSE) 
 	\item Plot the variable importance
@@ -241,9 +242,19 @@ We used the M5PrimeLab Octave toolbox as follows:
 	\item Use 10-fold Cross Validation to evaluate the predictive performance of the forest
 \end{enumerate}
 
-\subsection{Results}
+\subsection{Procedure for Random Forest}
+We used the M5PrimeLab Octave toolbox as follows:
+\begin{enumerate}  
+	\item Build tree forest (ensemble)
+	\item Calculate the out-of-bag Mean Squared Error (MSE) and plot it
+	\item Plot variable importance
+	\item Predict the forest
+	\item Use 10-fold Cross Validation to evaluate the predictive performance of the forest
+\end{enumerate}
+
+\subsection{Results for Decision Tree}
 The M5 algorithm generated 163 different rules using 13 variables.
-\break \bigskip After 10-fold Cross Validation the number of rules lowered to 71.
+\break After 10-fold Cross Validation with 14 variables used the number of rules lowered to 71.
 
 \bigskip
 Following Measures are collected:
@@ -259,7 +270,7 @@ Following Measures are collected:
 
 \begin{table}[H]
 	\centering
-	\caption{Result running 10-fold Cross Validation on Decision Tree}
+	\caption{Result running 10-fold Cross Validation on Model Tree}
 	\label{tab:Key-Indicator-DT}
 	\begin{tabular}{|l|l|}
 		\hline
@@ -276,7 +287,7 @@ Following Measures are collected:
 
 \begin{table}[H]
 	\centering
-	\caption{Result running 10-fold Cross Validation on Precision Tree}
+	\caption{Result running 10-fold Cross Validation on Regression Tree}
 	\label{tab:Key-Indicator-PT}
 	\begin{tabular}{|l|l|}
 		\hline
@@ -318,6 +329,23 @@ Following Measures are collected:
 		x4	       			& -0.018023 			\\ \hline
 	\end{tabular}
 \end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Result running 10-fold Cross Validation on Rules configuration}
+	\label{tab:Key-Indicator-RC}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Measure} 	& \textbf{Value} \\ \hline
+		MAE       			& 0.25774 		 \\ \hline
+		MSE       			& 0.18812 		 \\ \hline
+		RMSE       			& 0.43288		 \\ \hline
+		RRMSE       		& 0.89289 	  	 \\ \hline
+		R2       			& 0.19922  	 	 \\ \hline
+		nRules       		& 67.100   		 \\ \hline
+		nVars       		& 14.700   		 \\ \hline
+	\end{tabular}
+\end{table}
 \newpage
 \vfill
 \begin{sidewaysfigure}[h]
@@ -332,6 +360,28 @@ Following Measures are collected:
 \vfill
 \clearpage
 
+\subsection{Results for Random Forest}
+Random forest is grown with 50 trees using Bagging technique. As illustrated the lowest Mean Square Error (MSE) is achieved with 50 trees.
+\bigskip
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse_bagging.png}
+	\caption{Out-of-bag MSE using Bagging}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse.png}
+	\caption{Out-of-bag MSE}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{var_importance.png}
+	\caption{Variable importance}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bag_vs_cv.png}
+	\caption{Out-of-bag MSE vs Cross Validation}
+\end{figure}
 
 	
 \subsection{Lesson learned}
@@ -342,7 +392,7 @@ Following Measures are collected:
 	\item Easy results interpretation
 \end{enumerate}
 
-\subsubsection{Disadvantages of Random Trees}
+\subsubsection{Disadvantages of Decision Trees}
 \begin{enumerate}
 \item Prone to overfit and need to build forests to get good results
 \end{enumerate}

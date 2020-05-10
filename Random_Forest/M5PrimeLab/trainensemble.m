@@ -13,25 +13,25 @@ features = zeros(n,1);
 
 %% Growing ensembles of trees
 fprintf('\nGrowing ensembles of trees ...\n');
-params = m5pparams(false, 1, 4, false, 0, 0.05);
+params = m5pparams(true, 2, 4, true);
 
-nTrees = 5;
-numVarsTry = [-1,-1];
-paramsEnsemble = m5pparamsensemble(nTrees, numVarsTry, true, 1, false, true, 1, false, 0);
+nTrees = 1;
+numVarsTry = [2 4 8 16 26];
+paramsEnsemble = m5pparamsensemble(nTrees, numVarsTry, true, 1, false, true, 1, false, 50);
 
 figure; hold on;
-for i = 1:length(numVarsTry)
+for i = 1:5
 paramsEnsemble.numVarsTry = numVarsTry(i);
-[~, ~, ensembleResults] = m5pbuild(X, Y, params, features, paramsEnsemble);
+[~, ~, ensembleResults] = m5pbuild(X, Y, params, features, paramsEnsemble, true);
 plot(ensembleResults.OOBError(:,1));
 end
 grid on;
 xlabel('Number of trees');
 ylabel('Out-of-bag MSE');
-legend('alive', 'dead');
+legend({'2' '4' '8' '16' '26'});
 
-paramsEnsemble = m5pparamsensemble(nTrees);
-[model, time, ensembleResults] = m5pbuild(X, Y, params, features, paramsEnsemble);
+paramsEnsemble = m5pparamsensemble(nTrees, numVarsTry, true, 1, false, true, 1, false, 50);
+[model, time, ensembleResults] = m5pbuild(X, Y, params, features, paramsEnsemble, true);
 %==========================================================
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
@@ -55,16 +55,15 @@ fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
 %% Predict
-fprintf('\nPredicting ensembles of trees ...\n');
-P = zeros(1,n);
-[Yq, contrib] = m5ppredict(model, P);
-fprintf('Prediction: %f\n', Yq(1));
-fprintf('In-bag mean: %f\n', contrib(1,end));
-fprintf('Input variable contributions:\n');
-[~, idx] = sort(abs(contrib(1,1:end-1)), 'descend');
-for i = idx
-fprintf('x%d: %f\n', i, contrib(1,i));
-end
+%%fprintf('\nPredicting ensembles of trees ...\n');
+%%[Yq, contrib] = m5ppredict(model, X);
+%%fprintf('Prediction: %f\n', Yq(1));
+%%fprintf('In-bag mean: %f\n', contrib(1,end));
+%%fprintf('Input variable contributions:\n');
+%%[~, idx] = sort(abs(contrib(1,1:end-1)), 'descend');
+%%for i = idx
+%%fprintf('x%d: %f\n', i, contrib(1,i));
+%%end
 %==========================================================
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
@@ -80,7 +79,7 @@ plot(resultsCV.MSE);
 grid on;
 xlabel('Number of trees');
 ylabel('MSE');
-legend('alive', 'dead');
+legend({'Out-of-bag' 'Cross-Validation'});
 %==========================================================
  
 fprintf("\n=======END=========\n");

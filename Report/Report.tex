@@ -245,14 +245,14 @@ We used the M5PrimeLab Octave toolbox as follows:
 \subsection{Procedure for Random Forest}
 We used the M5PrimeLab Octave toolbox as follows:
 \begin{enumerate}  
-	\item Build tree forest (ensemble) 
-	\item Calculate the out-of-bag Mean Squared Error (MSE) 
-	\item Plot the variable importance
+	\item Build tree forest (ensemble)
+	\item Calculate the out-of-bag Mean Squared Error (MSE) and plot it
+	\item Plot variable importance
 	\item Predict the forest
 	\item Use 10-fold Cross Validation to evaluate the predictive performance of the forest
 \end{enumerate}
 
-\subsection{Results}
+\subsection{Results for Decision Tree}
 The M5 algorithm generated 163 different rules using 13 variables.
 \break After 10-fold Cross Validation with 14 variables used the number of rules lowered to 71.
 
@@ -360,6 +360,28 @@ Following Measures are collected:
 \vfill
 \clearpage
 
+\subsection{Results for Random Forest}
+Random forest is grown with 50 trees using Bagging technique. As illustrated the lowest Mean Square Error (MSE) is achieved with 50 trees.
+\bigskip
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse_bagging.png}
+	\caption{Out-of-bag MSE using Bagging}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse.png}
+	\caption{Out-of-bag MSE}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{var_importance.png}
+	\caption{Variable importance}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bag_vs_cv.png}
+	\caption{Out-of-bag MSE vs Cross Validation}
+\end{figure}
 
 	
 \subsection{Lesson learned}
@@ -370,7 +392,7 @@ Following Measures are collected:
 	\item Easy results interpretation
 \end{enumerate}
 
-\subsubsection{Disadvantages of Random Trees}
+\subsubsection{Disadvantages of Decision Trees}
 \begin{enumerate}
 \item Prone to overfit and need to build forests to get good results
 \end{enumerate}

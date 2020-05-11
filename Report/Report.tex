@@ -386,29 +386,82 @@ Random forest is grown with 50 trees using Bagging technique. As illustrated the
 	
 \subsection{Lesson learned}
 \subsubsection{Advantages of Decision Trees}
-\begin{enumerate}
+\begin{itemize}
 	\item No normalization or scaling of features
 	\item Suitable for mixed feature data types
 	\item Easy results interpretation
-\end{enumerate}
-
+\end{itemize}
 \subsubsection{Disadvantages of Decision Trees}
-\begin{enumerate}
+\begin{itemize}
 \item Prone to overfit and need to build forests to get good results
-\end{enumerate}
+\end{itemize}
 
 \subsubsection{Advantages of Random Forests}
-\begin{enumerate}
-	\item Powerful, highly accurate model on many different problems
-	\item No normalization or scaling of features
-	\item Suitable for mixed feature data types
-	\item Parallel computation for stable performance
-\end{enumerate}
-
+\begin{itemize}
+	\item Same as Random Trees
+	\item Powerful, parallel computation and suitable for many different problems
+\end{itemize}
 \subsubsection{Disadvantages of Random Forests}
-\begin{enumerate}
-	\item Not a good choice for high-dimensional data
-\end{enumerate}
+\begin{itemize}
+	\item Scalability problem with high-dimensional data
+\end{itemize}
+
+\section{Naive Bayes Classifier}
+A Naive Bayes classifier is a probabilistic machine learning model that’s used for classification task. The classifier is based on the probabilistic Bayes theorem.
+\begin{equation}
+\label{eq:bayes-theorem}
+P(A|B) = \frac{P(B|A) P(A)}{P(B)}
+\end{equation}
+Using Bayes theorem, we can find the probability of A happening, given that B has occurred. Here, B is the evidence and A is the hypothesis. The assumption made here is that the predictors/features are independent. That is presence of one particular feature does not affect the other. Hence it is called naive.
+
+\subsection{Types of classifier}
+\begin{itemize}
+	\item Multinomial Naive Bayes: for document classification
+	\item Bernoulli Naive Bayes: similar to Multinomial using boolean variables
+	\item Gaussian Naive Bayes: for datasets with continuous features
+\end{itemize}
+
+\subsection{Results}
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{heat_map.png}
+	\caption{PCC - Pearson correlation coefficient}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{Model metrics}
+	\label{tab:NB-metrics}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Measure} & \textbf{Train} & \textbf{Validation} \\ \hline
+		Accuracy       	 & 0.79    & 0.83 \\ \hline
+		Recall    		 & 0.71    & 0.82 \\ \hline
+		Precision    	 & 0.75    & 0.75 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Probability of each class}
+	\label{tab:NB-probabilities}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Measure} & \textbf{Value} \\ \hline
+		Survive  = 0     & 0.62    \\ \hline
+		Survive  = 1     & 0.38   \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Lesson learned}
+\subsubsection{Advantages}
+\begin{itemize}
+	\item Fast and easy to implement
+\end{itemize}
+\subsubsection{Disadvantages}
+\begin{itemize}
+	\item Features have to be independent for good classifier performance
+\end{itemize}
+
 
 \section{Neural Network}
 skt-learn was used 

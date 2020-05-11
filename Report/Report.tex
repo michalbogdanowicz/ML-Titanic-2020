@@ -225,7 +225,7 @@ Random forests reduce the risk of overfitting and accuracy is much higher than a
 
 
 \subsection{Procedure for Decision Tree}
-We used the M5PrimeLab Octave toolbox as follows:
+M5PrimeLab Octave toolbox has been choosen.
 \begin{enumerate}  
 	\item Normalize data introducing Dummy Variables and transform feature in numerical data
 	\item Build and plot the model tree
@@ -421,6 +421,17 @@ Using Bayes theorem, we can find the probability of A happening, given that B ha
 	\item Gaussian Naive Bayes: for datasets with continuous features
 \end{itemize}
 
+\subsection{Procedure}
+Python Scikit-learn library has been choosen.
+\begin{enumerate}  
+	\item Normalize data introducing Dummy Variables and transform feature in numerical data
+	\item Calculate and plot Pearson correlation coefficient (PCC) on each pair of features to  show the dependencies between features
+	\item Calculate the three different types of Naive Bayes classifier and compare the incorrect prediction results
+	\item Calculate the model metrics using the Gaussian Naive Bayes 
+	\item Calculate the probability of each class (dead or survived)
+\end{enumerate}
+
+
 \subsection{Results}
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{heat_map.png}
@@ -429,7 +440,20 @@ Using Bayes theorem, we can find the probability of A happening, given that B ha
 
 \begin{table}[H]
 	\centering
-	\caption{Model metrics}
+	\caption{Results comparison using 432 test records (30\% of dataset)}
+	\label{tab:result-comparison}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Measure} & \textbf{correct} & \textbf{incorrect} \\ \hline
+		Gaussian Naive Bayes       	 & 288    & 144 \\ \hline
+		Multinomial Naive Bayes      & 302    & 130 \\ \hline
+		Bernoulli Naive Bayes    	 & 322    & 110 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Model metrics with the remaining 70\% of train data}
 	\label{tab:NB-metrics}
 	\begin{tabular}{|l|l|l|}
 		\hline

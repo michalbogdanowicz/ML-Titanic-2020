@@ -421,6 +421,37 @@ Using Bayes theorem, we can find the probability of A happening, given that B ha
 	\item Gaussian Naive Bayes: for datasets with continuous features
 \end{itemize}
 
+\subsection{Results}
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{heat_map.png}
+	\caption{PCC - Pearson correlation coefficient}
+\end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{Model metrics}
+	\label{tab:NB-metrics}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Measure} & \textbf{Train} & \textbf{Validation} \\ \hline
+		Accuracy       	 & 0.79    & 0.83 \\ \hline
+		Recall    		 & 0.71    & 0.82 \\ \hline
+		Precision    	 & 0.75    & 0.75 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Probability of each class}
+	\label{tab:NB-probabilities}
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Measure} & \textbf{Value} \\ \hline
+		Survive  = 0     & 0.62    \\ \hline
+		Survive  = 1     & 0.38   \\ \hline
+	\end{tabular}
+\end{table}
+
 \subsection{Lesson learned}
 \subsubsection{Advantages}
 \begin{itemize}

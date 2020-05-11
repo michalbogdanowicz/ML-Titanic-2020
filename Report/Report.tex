@@ -470,8 +470,11 @@ skt-learn was used
 
 \begin{enumerate}
 	\item The optimal, from the perspective of accuracy, number of nodes and the number of hidden layers has to be found. A CV based test battery has been set in order. It takes in consideration form 1 to 5 hidden layers and from 22 to 32 nodes per layer. As it can be seen in \ref{tab:sklearn-NoScaling} the best on has 2 hidden layers and 28 nodes per layer, achieves 0.813 accuracy. Do note that the library chosen already applies regularization.
+	
 	\item One feature that is provided by sklearn is scaling. i.e. data is scaled to have a mean of 0 and std of 1. The methods used are said to improve with the scaling. Another test battery was performed similar to step 1. This time with the feature added. The accuracies estimated have a much smaller variance as it can be noticed in table \ref{tab:Scaled_gradient} in comparison to  \ref{tab:sklearn-NoScaling}.
+	
 	\item Driven by curiosity another test battery was set up. This battery tries to check for 1-2 hidden layers from 1 to 10 nodes each. The results is very interesting, seen in \ref{tab:NN-LessNodesPerLayer}. One layer with 3 nodes is to be enough to come very close to the accuracy given by 2 hideen layers and 28 nodes. The best model in this range is two layers and 10 nodes. The one found in step 1 is still slightly better.
+	
 	\item The learning curves can be seen here \ref{PLACE_GRAPH_} . As it can be seen the non-scaled version is much less "smooth" but much faster. It could be based on the simplification of having a lot of 0 values in the data. The result with the same amount of data leads to a less accurate model.
 	
 \end{enumerate}

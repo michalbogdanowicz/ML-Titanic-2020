@@ -37,7 +37,7 @@ The methods that have been used are:
 \begin{enumerate}  
 \item Logistic Regression
 \item Neural Networks
-\item Decision trees and Random Forest
+\item Decision Trees and Random Forest
 \item Naive Bayes Classifier
 \end{enumerate}
 
@@ -243,7 +243,7 @@ M5PrimeLab Octave toolbox has been choosen.
 \end{enumerate}
 
 \subsection{Procedure for Random Forest}
-We used the M5PrimeLab Octave toolbox as follows:
+M5PrimeLab Octave toolbox has been choosen.
 \begin{enumerate}  
 	\item Build tree forest (ensemble)
 	\item Calculate the out-of-bag Mean Squared Error (MSE) and plot it
@@ -349,13 +349,13 @@ Following Measures are collected:
 \newpage
 \vfill
 \begin{sidewaysfigure}[h]
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{decision_tree.png}
-	\caption{decision tree}
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{model_tree.png}
+	\caption{Model Tree}
 \end{sidewaysfigure}	
 \begin{sidewaysfigure}[h]
 	\centering
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{precision_tree.png}
-	\caption{precision tree}
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{regression_tree.png}
+	\caption{Regression Tree}
 \end{sidewaysfigure}
 \vfill
 \clearpage
@@ -429,6 +429,7 @@ Python Scikit-learn library has been choosen.
 	\item Calculate the three different types of Naive Bayes classifier and compare the incorrect prediction results
 	\item Calculate the model metrics using the Gaussian Naive Bayes 
 	\item Calculate the probability of each class (dead or survived)
+	\item Plot the learning curve for Gaussian classifier and Bernoulli Naive Bayes classifier
 \end{enumerate}
 
 
@@ -475,6 +476,16 @@ Python Scikit-learn library has been choosen.
 		Survive  = 1     & 0.38   \\ \hline
 	\end{tabular}
 \end{table}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{gaussianNB_curve.png}
+	\caption{Gaussian Naive Bayes: the learning curve, scalability and performace. Right part is with scaled data.}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bernoulliNB_curve.png}
+	\caption{Bernoulli Naive Bayes: the learning curve, scalability and performace. Right part is with scaled data.}
+\end{figure}
 
 \subsection{Lesson learned}
 \subsubsection{Advantages}

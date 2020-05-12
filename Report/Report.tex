@@ -208,7 +208,7 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 Every feature + the features not having only 0's and 1's elevated to the second power. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustement step would be meaningless).
 
 \section{Decision trees and random forest}
-\subsection{Introduction to decision trees}
+\subsection{Introduction: Decision Trees}
 A decision tree builds upon iteratively asking questions to partition data.
 Our aim is to increase the predictiveness of the model as much as possible at each partitioning so that the model keeps gaining information about the dataset.
 There are two ways to measure the quality of a split:
@@ -219,30 +219,17 @@ There are two ways to measure the quality of a split:
 	When splitting decision trees try to be more predictive, less impure and reduce entropy. Entropy is a measure of uncertainty or randomness. The more randomness a variable (feature) has, the higher the entropy is.  
 \end{enumerate}
 
-\subsection{Introduction to random forests}
-Random forest is an ensemble of many decision trees. Random forests are built using a method called bagging in which each decision tree is used as parallel estimator.
-Random forests reduce the risk of overfitting and accuracy is much higher than a single decision tree. Furthermore, decision trees in a random forest run in parallel so that the time does not become a bottleneck but performance is required.
-
-
-\subsection{Procedure: Decision Tree}
+\subsection{Procedure: Decision Trees}
 M5PrimeLab Octave toolbox has been choosen.
 \begin{enumerate}  
 	\item The model tree is build with suggested parameters. Customization of parameters has been necessary to achieve a printable plot. For example, pruning and smoothing factor are not applied to get better performance in tree construction.
-	\item Different values for K are tried to run Cross Validation. Various experiments has showed K=10 is ideal for best tradeoff between metrics and algorithm running times. The collected measures are MAE, MSE, RMSE, RRMSE, R2, nRules, nVars.
-	\item The regression tree is build with suggested parameters. Also in this case parameters has to be adjusted for best plotting. The main difference to model tree is that the leaf nodes contain response values instead of models. As for the model tree K=10 leads to the best results in the Cross Validation folding technique. The resulting measures are very similar to those ot the model tree.
-	\item The model tree prediction value has been calculated, the training set mean and the input variable contributions. The top three variables influencing the model are: Title (Mr.), Pclass 3 (lower class) and Sibsp (number of siblings/spouses).
-	\item The decision rules are extracted from the model tree. For curiosity the 10-fold Cross Validation technique is applied on the rules configuration to compare the resulting measures with those of the tree (model and regression). The Mean Square Error (MSE) is slighty higher although the number of rules used are more than halved.
+	\item Different values for K are tried to run Cross Validation. Various experiments has showed K=10 is ideal for best tradeoff between metrics and algorithm running times. The collected measures are MAE, MSE, RMSE, RRMSE, R2, nRules, nVars (table \ref{tab:CV-ModelTree}).
+	\item The regression tree is build with suggested parameters. Also in this case parameters has to be adjusted for best plotting. The main difference to model tree is that the leaf nodes contain response values instead of models. As for the model tree K=10 leads to the best results in the Cross Validation folding technique. The resulting measures are very similar to those ot the model tree (table \ref{tab:CV-RegressionTree}).
+	\item The model tree prediction has been calculated (table \ref{tab:Result-Prediction}). A further important insight is the input variable contributions (table \ref{tab:Vars-Contribution}).  The top three variables influencing the model are: Title (Mr.), Pclass 3 (lower class) and Sibsp (number of siblings/spouses).
+	\item The decision rules are extracted from the model tree. For curiosity the 10-fold Cross Validation technique is applied on the rules configuration (table \ref{tab:CV-Rules}) to compare the measures with those of the trees (model and regression). The Mean Square Error (MSE) is slighty higher although the number of rules used are more than halved.
 \end{enumerate}
 
-\subsection{Procedure: Random Forest}
-M5PrimeLab Octave toolbox has been choosen.
-\begin{enumerate}  
-	\item The tree forest also called ensemble is build with suggested parameters. Customization of parameters has been necessary to lower as much as possible the Mean Square Error (MSE). The error rate is plotted using different numbers of random chosen features. The number of used trees is set to 50 for obtaining the best tradeoff between metrics and running times. Growing big ensembles is very expensive. For this reason higher values of 50 are not taken into consideration. 
-	\item The variable importance (influence) is plotted. In an ensembles, in contrast do the single decision tree, a greater number of variables contribute to the result because different combinations of features are used.
-	\item Cross Validation folding technique is used to evaluate the predictive performance of the forest. The best MSE is obtained with K=10. Higher values cause a exponential growth in the algorithm running times. As seen in the graph Cross validation MSE is lower than the Out-of-bag MSE.
-\end{enumerate}
-
-\subsection{Results: Decision Tree}
+\subsection{Results: Decision Trees}
 The M5 algorithm generated 163 different rules using 13 variables.
 \break After 10-fold Cross Validation with 14 variables used the number of rules lowered to 71.
 
@@ -260,8 +247,8 @@ Following Measures are collected:
 
 \begin{table}[H]
 	\centering
-	\caption{Result running 10-fold Cross Validation on Model Tree}
-	\label{tab:Key-Indicator-DT}
+	\caption{10-fold Cross Validation on Model Tree}
+	\label{tab:CV-ModelTree}
 	\begin{tabular}{|l|l|}
 		\hline
 		\textbf{Measure} & \textbf{Value} \\ \hline
@@ -277,8 +264,8 @@ Following Measures are collected:
 
 \begin{table}[H]
 	\centering
-	\caption{Result running 10-fold Cross Validation on Regression Tree}
-	\label{tab:Key-Indicator-PT}
+	\caption{10-fold Cross Validation on Regression Tree}
+	\label{tab:CV-RegressionTree}
 	\begin{tabular}{|l|l|}
 		\hline
 		\textbf{Measure} 	& \textbf{Value} \\ \hline
@@ -307,7 +294,7 @@ Following Measures are collected:
 \begin{table}[H]
 	\centering
 	\caption{Input variable contributions}
-	\label{tab:Variable-Contribution}
+	\label{tab:Vars-Contribution}
 	\begin{tabular}{|l|l|}
 		\hline
 		\textbf{Variable}   & \textbf{Contribution}	\\ \hline
@@ -322,8 +309,8 @@ Following Measures are collected:
 
 \begin{table}[H]
 	\centering
-	\caption{Result running 10-fold Cross Validation on Rules configuration}
-	\label{tab:Key-Indicator-RC}
+	\caption{10-fold Cross Validation on Rules configuration}
+	\label{tab:CV-Rules}
 	\begin{tabular}{|l|l|}
 		\hline
 		\textbf{Measure} 	& \textbf{Value} \\ \hline
@@ -350,29 +337,44 @@ Following Measures are collected:
 \vfill
 \clearpage
 
+\subsection{Introduction: Random Forest}
+Random forest is an ensemble of many decision trees. Random forests are built using a method called bagging in which each decision tree is used as parallel estimator.
+Random forests reduce the risk of overfitting and accuracy is much higher than a single decision tree. Furthermore, decision trees in a random forest run in parallel so that the time does not become a bottleneck but performance is required.
+
+\subsection{Procedure: Random Forest}
+M5PrimeLab Octave toolbox has been choosen.
+\begin{enumerate}  
+	\item The tree forest also called ensemble is build with suggested parameters. Customization of parameters has been necessary to lower as much as possible the Mean Square Error (MSE). The error rate is plotted using different numbers of random chosen features (figure \ref{fig:MSE}). The number of used trees is set to 50 for obtaining the best tradeoff between metrics and running times. Growing big ensembles is very expensive. For this reason higher values of 50 are not taken into consideration. 
+	\item The variable importance (influence) is plotted (figure \ref{fig:Var-Importance}) In an ensembles, in contrast do the single decision tree, a greater number of variables contribute to the result because different combinations of features are used.
+	\item Cross Validation folding technique is used to evaluate the predictive performance of the forest. The best MSE is obtained with K=10. Higher values cause a exponential growth in the algorithm running times. As seen in the graph Cross validation MSE is lower than the Out-of-bag MSE (figure \ref{fig:CV}).
+\end{enumerate}
+
 \subsection{Results: Random Forest}
 An ensemble is grown with 50 trees using Random Forest. As illustrated the lowest Mean Square Error (MSE) is achieved with 50 trees. The MSE of random forest is lower than the one of the single decision tree. From around 18\% it has lowered to around 14\%. That proves Random Forest technique is a more powerful than building single decision trees. Although, more computational power is required.
-\bigskip
+
 \begin{figure}[H]
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse_bagging.png}
-	%\caption{Out-of-bag MSE using Bagging}
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse_rf.png}
+	\caption{MSE Random Forest}
+	\label{fig:MSE}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse.png}
-	%\caption{Out-of-bag MSE}
+	\caption{MSE}
+	\label{fig:MSE-general}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{var_importance.png}
-	%\caption{Variable importance}
+	\caption{Variable Importance}
+	\label{fig:Var-Importance}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bag_vs_cv.png}
-	%\caption{Out-of-bag MSE vs Cross Validation}
+	\caption{Cross Validation}
+	\label{fig:CV}
 \end{figure}
-
 	
 \subsection{Lesson learned}
 \subsubsection{Advantages of Decision Trees}
@@ -386,12 +388,12 @@ An ensemble is grown with 50 trees using Random Forest. As illustrated the lowes
 \item Prone to overfit and need to build forests to get good results
 \end{itemize}
 
-\subsubsection{Advantages of Random Forests}
+\subsubsection{Advantages of Random Forest}
 \begin{itemize}
 	\item Same as Random Trees
 	\item Powerful, parallel computation and suitable for many different problems
 \end{itemize}
-\subsubsection{Disadvantages of Random Forests}
+\subsubsection{Disadvantages of Random Forest}
 \begin{itemize}
 	\item Scalability problem with high-dimensional data
 \end{itemize}
@@ -417,7 +419,7 @@ Python Scikit-learn library has been choosen.
 	\item The Pearson correlation coefficient (PCC) on each pair of features is plotted to inspect the dependencies between features. Naive Bayes classifier requires independent features to get the best results.
 	\item The three types of Naive Bayes classifier (Gaussian, Bernoulli, Multinomial) are used on the test set (30\% of dataset) to inspect the incorrect prediction results. Bernoulli Naive Bayes achieved the lowest error rate.
 	\item The model metrics using the Gaussian Naive Bayes are calculated and the probability of each class (dead or survived) is predicted.
-	\item Plot the learning curve for Gaussian classifier and Bernoulli Naive Bayes classifier
+	\item Plot the learning curve for Gaussian and Bernoulli Naive Bayes classifier
 \end{enumerate}
 
 
@@ -429,7 +431,7 @@ Python Scikit-learn library has been choosen.
 
 \begin{table}[H]
 	\centering
-	\caption{Results comparison using 432 test records (30\% of dataset)}
+	\caption{Results comparison using 432 test records (33\% of dataset)}
 	\label{tab:result-comparison}
 	\begin{tabular}{|l|l|l|}
 		\hline
@@ -442,7 +444,7 @@ Python Scikit-learn library has been choosen.
 
 \begin{table}[H]
 	\centering
-	\caption{Model metrics with the remaining 70\% of train data}
+	\caption{Model metrics - Gaussian Naive Bayes}
 	\label{tab:NB-metrics}
 	\begin{tabular}{|l|l|l|}
 		\hline
@@ -450,6 +452,19 @@ Python Scikit-learn library has been choosen.
 		Accuracy       	 & 0.80    & 0.84 \\ \hline
 		Recall    		 & 0.72    & 0.82 \\ \hline
 		Precision    	 & 0.74    & 0.75 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Model metrics - Bernoulli Naive Bayes}
+	\label{tab:NB-metrics2}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Measure} & \textbf{Train} & \textbf{Validation} \\ \hline
+		Accuracy       	 & 0.79    & 0.81 \\ \hline
+		Recall    		 & 0.71    & 0.79 \\ \hline
+		Precision    	 & 0.73    & 0.74 \\ \hline
 	\end{tabular}
 \end{table}
 

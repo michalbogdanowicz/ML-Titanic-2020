@@ -44,8 +44,8 @@ The methods that have been used are:
 \section{Data}
 \subsection{Incomplete Data}
 
-The Data propsed to the professor was incomplete. It heavily reduced the avialble data to perform the best practices for evaluating a model. The test and training were already separated and ground truth was missing. So the complete dataset has been taken from the internet. In addition the complete list of surviors can be found at the wikipedia page \href{https://en.wikipedia.org/wiki/Passengers_of_the_RMS_Titanic}{here} (not a ML-friendly format).
-This data sadly is used to cheat on the kaggle competition. Making it a quite infamous one.
+The Data proposed to the professor was incomplete. It heavily reduced the available data to perform the best practices for evaluating a model. The test and training were already separated and ground truth was missing. So the complete dataset has been taken from the internet. In addition the complete list of survivors can be found at the Wikipedia page \href{https://en.wikipedia.org/wiki/Passengers_of_the_RMS_Titanic}{here} (not a ML-friendly format).
+This data sadly is used to cheat on the Kaggle competition. Making it a quite infamous one.
 
 \subsection{Data Format}
 
@@ -81,13 +81,13 @@ Spouse = husband, wife (mistresses and fiancés were ignored)
 parch: The dataset defines family relations in this way
 Parent = mother, father
 Child = daughter, son, stepdaughter, stepson
-Some children travelled only with a nanny, therefore parch=0 for them.
+Some children traveled only with a nanny, therefore parch=0 for them.
 
 
 
 \subsection{Data Preparation}
 The data cannot be used as it is.
-The names are going to be deleted, as that should not inlfuence the resut.
+The names are going to be deleted, as that should not influence the result.
 
 \section{Logistic Regression}
 \subsection{Remark}
@@ -99,8 +99,8 @@ Since a lot of the data is a binary variable (0,1). The square of 0 and 1 comes 
 Procedure used for selecting the Logistic Regression model.
 
 \begin{enumerate}  
-\item Tthe maximum polynomial wase chosen by comparing the measures obtained with Cross Valdation (CV) methodology. The data can be seen in Table
-\ref{tab:LR-Measures}. Maximim degree 2 has prevailed in most iterations. At each iteration the folds are randomized, and maximum degree 1 rarely beat 2.
+\item The maximum polynomial was chosen by comparing the measures obtained with Cross Validation (CV) methodology. The data can be seen in Table
+\ref{tab:LR-Measures}. Maximum degree 2 has prevailed in most iterations. At each iteration the folds are randomized, and maximum degree 1 rarely beat 2.
 
 \begin{table}[]
 \centering
@@ -120,10 +120,10 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \end{tabular}
 \end{table}
 
-\item Bias and variance was checkd by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the Graph \ref{Graph:LR-BV}, the cv and test MAE are very close. No Variance or Bias detected. 
+\item Bias and variance was checked by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the Graph \ref{Graph:LR-BV}, the cv and test MAE are very close. No Variance or Bias detected. 
 
 
-\item Quality of the model was controlled with the contruction of the learning curve in Graph \ref{Graph:LR-LearningCurve} to see if there was variance and more training samples were required. They were not, as the algotihm used in octave iteself states around 200 iteration that the step become too small to be worth consideration.
+\item Quality of the model was controlled with the construction of the learning curve in Graph \ref{Graph:LR-LearningCurve} to see if there was variance and more training samples were required. They were not, as the algorithm used in octave itself states around 200 iteration that the step become too small to be worth consideration.
 \end{enumerate}
 
 
@@ -220,13 +220,13 @@ There are two ways to measure the quality of a split:
 \end{enumerate}
 
 \subsection{Procedure: Decision Trees}
-M5PrimeLab Octave toolbox has been choosen.
+M5PrimeLab Octave toolbox has been chosen.
 \begin{enumerate}  
 	\item The model tree is build with suggested parameters. Customization of parameters has been necessary to achieve a printable plot. For example, pruning and smoothing factor are not applied to get better performance in tree construction.
 	\item Different values for K are tried to run Cross Validation. Various experiments has showed K=10 is ideal for best tradeoff between metrics and algorithm running times. The collected measures are MAE, MSE, RMSE, RRMSE, R2, nRules, nVars (table \ref{tab:CV-ModelTree}).
 	\item The regression tree is build with suggested parameters. Also in this case parameters has to be adjusted for best plotting. The main difference to model tree is that the leaf nodes contain response values instead of models. As for the model tree K=10 leads to the best results in the Cross Validation folding technique. The resulting measures are very similar to those ot the model tree (table \ref{tab:CV-RegressionTree}).
 	\item The model tree prediction has been calculated (table \ref{tab:Result-Prediction}). A further important insight is the input variable contributions (table \ref{tab:Vars-Contribution}).  The top three variables influencing the model are: Title (Mr.), Pclass 3 (lower class) and Sibsp (number of siblings/spouses).
-	\item The decision rules are extracted from the model tree. For curiosity the 10-fold Cross Validation technique is applied on the rules configuration (table \ref{tab:CV-Rules}) to compare the measures with those of the trees (model and regression). The Mean Square Error (MSE) is slighty higher although the number of rules used are more than halved.
+	\item The decision rules are extracted from the model tree. For curiosity the 10-fold Cross Validation technique is applied on the rules configuration (table \ref{tab:CV-Rules}) to compare the measures with those of the trees (model and regression). The Mean Square Error (MSE) is slightly higher although the number of rules used are more than halved.
 \end{enumerate}
 
 \subsection{Results: Decision Trees}
@@ -342,26 +342,26 @@ Random forest is an ensemble of many decision trees. Random forests are built us
 Random forests reduce the risk of overfitting and accuracy is much higher than a single decision tree. Furthermore, decision trees in a random forest run in parallel so that the time does not become a bottleneck but performance is required.
 
 \subsection{Procedure: Random Forest}
-M5PrimeLab Octave toolbox has been choosen.
+M5PrimeLab Octave toolbox has been chosen.
 \begin{enumerate}  
-	\item The tree forest also called ensemble is build with suggested parameters. Customization of parameters has been necessary to lower as much as possible the Mean Square Error (MSE). The error rate is plotted using different numbers of random chosen features (figure \ref{fig:MSE}). The number of used trees is set to 50 for obtaining the best tradeoff between metrics and running times. Growing big ensembles is very expensive. For this reason higher values of 50 are not taken into consideration. 
-	\item The variable importance (influence) is plotted (figure \ref{fig:Var-Importance}) In an ensembles, in contrast do the single decision tree, a greater number of variables contribute to the result because different combinations of features are used.
-	\item Cross Validation folding technique is used to evaluate the predictive performance of the forest. The best MSE is obtained with K=10. Higher values cause a exponential growth in the algorithm running times. As seen in the graph Cross validation MSE is lower than the Out-of-bag MSE (figure \ref{fig:CV}).
+	\item The tree forest also called ensemble is build with suggested parameters. Customization of parameters has been necessary to lower as much as possible the Mean Square Error (MSE) (figure \ref{fig:MSE-general}). Different features subsets lead to various error rates (figure \ref{fig:MSE}). The lowest error rate is obtained using 8 features. The number utilized trees is set to 50 for obtaining the best trade-off between metrics and running times. Growing big ensembles is very expensive. For this reason higher values of 50 are not taken into consideration. 
+	\item The variable importance (influence) is plotted (figure \ref{fig:Var-Importance}). In an ensembles, in contrast to the single decision tree, a greater combination of features contribute to the result because the sampling with replacement mechanism is used.
+	\item Cross Validation folding technique is used to evaluate the predictive performance of the forest. The best MSE is obtained with K=10. Higher values cause a relevant growth in the algorithm running times. As seen in figure \ref{fig:CV} Cross validation MSE is lower than the Out-of-bag MSE. Out-of-bag MSE is suitable for low datasets where a splitting is not possible.
 \end{enumerate}
 
 \subsection{Results: Random Forest}
 An ensemble is grown with 50 trees using Random Forest. As illustrated the lowest Mean Square Error (MSE) is achieved with 50 trees. The MSE of random forest is lower than the one of the single decision tree. From around 18\% it has lowered to around 14\%. That proves Random Forest technique is a more powerful than building single decision trees. Although, more computational power is required.
 
 \begin{figure}[H]
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse_rf.png}
-	\caption{MSE Random Forest}
-	\label{fig:MSE}
-\end{figure}
-
-\begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse.png}
 	\caption{MSE}
 	\label{fig:MSE-general}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse_rf.png}
+	\caption{MSE Random Forest}
+	\label{fig:MSE}
 \end{figure}
 
 \begin{figure}[H]
@@ -372,26 +372,26 @@ An ensemble is grown with 50 trees using Random Forest. As illustrated the lowes
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bag_vs_cv.png}
-	\caption{Cross Validation}
+	\caption{Cross Validation vs Out-of-bag MSE}
 	\label{fig:CV}
 \end{figure}
 	
 \subsection{Lesson learned}
 \subsubsection{Advantages of Decision Trees}
 \begin{itemize}
-	\item No normalization or scaling of features
+	\item No necessity for data normalization or feature scaling
 	\item Suitable for mixed feature data types
-	\item Easy results interpretation
+	\item Easy results interpretation with trees of small depth
 \end{itemize}
 \subsubsection{Disadvantages of Decision Trees}
 \begin{itemize}
-\item Prone to overfit and need to build forests to get good results
+	\item Prone to overfit with real-world datasets (high depth trees) and thus leading to higher variance in the model
 \end{itemize}
 
 \subsubsection{Advantages of Random Forest}
 \begin{itemize}
-	\item Same as Random Trees
-	\item Powerful, parallel computation and suitable for many different problems
+	\item No overfitting due to ensemble of decision trees
+	\item Parallel computation
 \end{itemize}
 \subsubsection{Disadvantages of Random Forest}
 \begin{itemize}
@@ -404,9 +404,10 @@ A Naive Bayes classifier is a probabilistic machine learning model that’s used
 \label{eq:bayes-theorem}
 P(A|B) = \frac{P(B|A) P(A)}{P(B)}
 \end{equation}
-Using Bayes theorem, we can find the probability of A happening, given that B has occurred. Here, B is the evidence and A is the hypothesis. The assumption made here is that the predictors/features are independent. That is presence of one particular feature does not affect the other. Hence it is called naive.
+Using Bayes theorem, we can find the probability of A happening, given that B has occurred. Here, B is the evidence and A is the hypothesis. The assumption made here is that the predictors/features are independent. That means presence of one particular feature does not affect the other one (naive feature).
 
-\subsection{Types of classifier}
+\bigskip
+Following types of classifier exist:
 \begin{itemize}
 	\item Multinomial Naive Bayes: for document classification
 	\item Bernoulli Naive Bayes: similar to Multinomial using boolean variables
@@ -414,12 +415,12 @@ Using Bayes theorem, we can find the probability of A happening, given that B ha
 \end{itemize}
 
 \subsection{Procedure}
-Python Scikit-learn library has been choosen.
+Python Scikit-learn library has been chosen.
 \begin{enumerate}  
-	\item The Pearson correlation coefficient (PCC) on each pair of features is plotted to inspect the dependencies between features. Naive Bayes classifier requires independent features to get the best results.
-	\item The three types of Naive Bayes classifier (Gaussian, Bernoulli, Multinomial) are used on the test set (30\% of dataset) to inspect the incorrect prediction results. Bernoulli Naive Bayes achieved the lowest error rate.
-	\item The model metrics using the Gaussian Naive Bayes are calculated and the probability of each class (dead or survived) is predicted.
-	\item Plot the learning curve for Gaussian and Bernoulli Naive Bayes classifier
+	\item The Pearson correlation coefficient (PCC) on each pair of features is plotted to inspect the correlation between features (heat-map \ref{fig:PCC}). Naive Bayes classifier requires independent features to get the best results.
+	\item The three types of Naive Bayes classifier (Gaussian, Bernoulli, Multinomial) are used on the test set (30\% of dataset) to inspect the incorrect prediction results (table \ref{tab:result-comparison}). Bernoulli Naive Bayes achieved the lowest error rate.
+	\item The model metrics using the Gaussian Naive Bayes (table \ref{tab:Gaussian-metrics}) and Bernoulli Naive Bayes (table \ref{tab:Bernoulli-metrics}) are calculated and the probability of each class (dead or survived) is predicted (table \ref{tab:result-comparison}). Gaussian Naive Bayes achieved the better scores.
+	\item For a better understanding the learning curves for Gaussian classifier (figure \ref{fig:Gaussian-curve}) and Bernoulli classifier (figure \ref{fig:Bernoulli-curve}) are plotted. Bernoulli classifier achieves more stable scores and the scaling does not influence the performance. Gaussian classifier suffers from scaling.
 \end{enumerate}
 
 
@@ -427,11 +428,12 @@ Python Scikit-learn library has been choosen.
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{heat_map.png}
 	\caption{PCC - Pearson correlation coefficient}
+	\label{fig:PCC}
 \end{figure}
 
 \begin{table}[H]
 	\centering
-	\caption{Results comparison using 432 test records (33\% of dataset)}
+	\caption{Results comparison using 432 test records)}
 	\label{tab:result-comparison}
 	\begin{tabular}{|l|l|l|}
 		\hline
@@ -445,7 +447,7 @@ Python Scikit-learn library has been choosen.
 \begin{table}[H]
 	\centering
 	\caption{Model metrics - Gaussian Naive Bayes}
-	\label{tab:NB-metrics}
+	\label{tab:Gaussian-metrics}
 	\begin{tabular}{|l|l|l|}
 		\hline
 		\textbf{Measure} & \textbf{Train} & \textbf{Validation} \\ \hline
@@ -458,7 +460,7 @@ Python Scikit-learn library has been choosen.
 \begin{table}[H]
 	\centering
 	\caption{Model metrics - Bernoulli Naive Bayes}
-	\label{tab:NB-metrics2}
+	\label{tab:Bernoulli-metrics}
 	\begin{tabular}{|l|l|l|}
 		\hline
 		\textbf{Measure} & \textbf{Train} & \textbf{Validation} \\ \hline
@@ -482,12 +484,14 @@ Python Scikit-learn library has been choosen.
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{gaussianNB_curve.png}
-	\caption{Gaussian Naive Bayes: the learning curve, scalability and performace. Right part is with scaled data.}
+	\caption{Gaussian Naive Bayes: the learning curve, scalability and performance. Right part is with scaled data.}
+	\label{fig:Gaussian-curve}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bernoulliNB_curve.png}
-	\caption{Bernoulli Naive Bayes: the learning curve, scalability and performace. Right part is with scaled data.}
+	\caption{Bernoulli Naive Bayes: the learning curve, scalability and performance. Right part is with scaled data.}
+	\label{fig:Bernoulli-curve}
 \end{figure}
 
 \subsection{Lesson learned}
@@ -511,7 +515,7 @@ skt-learn was used
 	
 	\item One feature that is provided by sklearn is scaling. i.e. data is scaled to have a mean of 0 and std of 1. The methods used are said to improve with the scaling. Another test battery was performed similar to step 1. This time with the feature added. The accuracies estimated have a much smaller variance as it can be noticed in table \ref{tab:Scaled_gradient} in comparison to  \ref{tab:sklearn-NoScaling}.
 	
-	\item Driven by curiosity another test battery was set up. This battery tries to check for 1-2 hidden layers from 1 to 10 nodes each. The results is very interesting, seen in \ref{tab:NN-LessNodesPerLayer}. One layer with 3 nodes is to be enough to come very close to the accuracy given by 2 hideen layers and 28 nodes. The best model in this range is two layers and 10 nodes. The one found in step 1 is still slightly better.
+	\item Driven by curiosity another test battery was set up. This battery tries to check for 1-2 hidden layers from 1 to 10 nodes each. The results is very interesting, seen in \ref{tab:NN-LessNodesPerLayer}. One layer with 3 nodes is to be enough to come very close to the accuracy given by 2 hidden layers and 28 nodes. The best model in this range is two layers and 10 nodes. The one found in step 1 is still slightly better.
 	
 	\item The learning curves can be seen here \ref{PLACE_GRAPH_} . As it can be seen the non-scaled version is much less "smooth" but much faster. It could be based on the simplification of having a lot of 0 values in the data. The result with the same amount of data leads to a less accurate model.
 	
@@ -566,12 +570,14 @@ The most  accurate model is 2 hidden layers and 28 nodes each}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{plot-nn-learningcurve.png}
-	\caption{Running on the chosen model the learning curve, scalability and performace. Same data one, left side is not scaled.}
+	\caption{Running on the chosen model the learning curve, scalability and performance. Same data one, left side is not scaled.}
 \end{figure}
 
 
 \section{Conclusion}
-Write your conclusion here.
-
+Machine learning is a very big and interesting topic in constant evolution.
+\break In this project we had the possibility to experiment with Supervised Learning algorithms.
+There is no magic formula to solve tasks in one shot. Every algorithm has its characteristics and relative drawbacks. Only with experience someone gets the ability to choose the suitable technique to solve real-world problems as best as possible.
+Furthermore, the project stimulate us to try some Kaggle competitions for the future.
 \end{document}
 

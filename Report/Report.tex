@@ -221,38 +221,28 @@ There are two ways to measure the quality of a split:
 
 \subsection{Introduction to random forests}
 Random forest is an ensemble of many decision trees. Random forests are built using a method called bagging in which each decision tree is used as parallel estimator.
-Random forests reduce the risk of overfitting and accuracy is much higher than a single decision tree. Furthermore, decision trees in a random forest run in parallel so that the time does not become a bottleneck.
+Random forests reduce the risk of overfitting and accuracy is much higher than a single decision tree. Furthermore, decision trees in a random forest run in parallel so that the time does not become a bottleneck but performance is required.
 
 
-\subsection{Procedure for Decision Tree}
+\subsection{Procedure: Decision Tree}
 M5PrimeLab Octave toolbox has been choosen.
 \begin{enumerate}  
-	\item Normalize data introducing Dummy Variables and transform feature in numerical data
-	\item Build and plot the model tree
-	\item Use 10-fold Cross Validation on model tree to calculate MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
-	\item Build and plot the regression tree
-	\item Use 10-fold Cross Validation on regression tree to calculate MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
-	\item Calculate prediction, training set mean and input variable contributions
-	\item Extract the decision rules from the tree
-	\item Use 10-fold Cross Validation on decision rules to calculate MAE, MSE, RMSE, RRMSE, R2, nRules, nVars
-	\item Build tree forest (ensemble) 
-	\item Calculate the out-of-bag Mean Squared Error (MSE) 
-	\item Plot the variable importance
-	\item Predict the forest
-	\item Use 10-fold Cross Validation to evaluate the predictive performance of the forest
+	\item The model tree is build with suggested parameters. Customization of parameters has been necessary to achieve a printable plot. For example, pruning and smoothing factor are not applied to get better performance in tree construction.
+	\item Different values for K are tried to run Cross Validation. Various experiments has showed K=10 is ideal for best tradeoff between metrics and algorithm running times. The collected measures are MAE, MSE, RMSE, RRMSE, R2, nRules, nVars.
+	\item The regression tree is build with suggested parameters. Also in this case parameters has to be adjusted for best plotting. The main difference to model tree is that the leaf nodes contain response values instead of models. As for the model tree K=10 leads to the best results in the Cross Validation folding technique. The resulting measures are very similar to those ot the model tree.
+	\item The model tree prediction value has been calculated, the training set mean and the input variable contributions. The top three variables influencing the model are: Title (Mr.), Pclass 3 (lower class) and Sibsp (number of siblings/spouses).
+	\item The decision rules are extracted from the model tree. For curiosity the 10-fold Cross Validation technique is applied on the rules configuration to compare the resulting measures with those of the tree (model and regression). The Mean Square Error (MSE) is slighty higher although the number of rules used are more than halved.
 \end{enumerate}
 
-\subsection{Procedure for Random Forest}
+\subsection{Procedure: Random Forest}
 M5PrimeLab Octave toolbox has been choosen.
 \begin{enumerate}  
-	\item Build tree forest (ensemble)
-	\item Calculate the out-of-bag Mean Squared Error (MSE) and plot it
-	\item Plot variable importance
-	\item Predict the forest
-	\item Use 10-fold Cross Validation to evaluate the predictive performance of the forest
+	\item The tree forest also called ensemble is build with suggested parameters. Customization of parameters has been necessary to lower as much as possible the Mean Square Error (MSE). The error rate is plotted using different numbers of random chosen features. The number of used trees is set to 50 for obtaining the best tradeoff between metrics and running times. Growing big ensembles is very expensive. For this reason higher values of 50 are not taken into consideration. 
+	\item The variable importance (influence) is plotted. In an ensembles, in contrast do the single decision tree, a greater number of variables contribute to the result because different combinations of features are used.
+	\item Cross Validation folding technique is used to evaluate the predictive performance of the forest. The best MSE is obtained with K=10. Higher values cause a exponential growth in the algorithm running times. As seen in the graph Cross validation MSE is lower than the Out-of-bag MSE.
 \end{enumerate}
 
-\subsection{Results for Decision Tree}
+\subsection{Results: Decision Tree}
 The M5 algorithm generated 163 different rules using 13 variables.
 \break After 10-fold Cross Validation with 14 variables used the number of rules lowered to 71.
 
@@ -360,27 +350,27 @@ Following Measures are collected:
 \vfill
 \clearpage
 
-\subsection{Results for Random Forest}
-Random forest is grown with 50 trees using Bagging technique. As illustrated the lowest Mean Square Error (MSE) is achieved with 50 trees.
+\subsection{Results: Random Forest}
+An ensemble is grown with 50 trees using Random Forest. As illustrated the lowest Mean Square Error (MSE) is achieved with 50 trees. The MSE of random forest is lower than the one of the single decision tree. From around 18\% it has lowered to around 14\%. That proves Random Forest technique is a more powerful than building single decision trees. Although, more computational power is required.
 \bigskip
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse_bagging.png}
-	\caption{Out-of-bag MSE using Bagging}
+	%\caption{Out-of-bag MSE using Bagging}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{mse.png}
-	\caption{Out-of-bag MSE}
+	%\caption{Out-of-bag MSE}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{var_importance.png}
-	\caption{Variable importance}
+	%\caption{Variable importance}
 \end{figure}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{bag_vs_cv.png}
-	\caption{Out-of-bag MSE vs Cross Validation}
+	%\caption{Out-of-bag MSE vs Cross Validation}
 \end{figure}
 
 	
@@ -424,11 +414,9 @@ Using Bayes theorem, we can find the probability of A happening, given that B ha
 \subsection{Procedure}
 Python Scikit-learn library has been choosen.
 \begin{enumerate}  
-	\item Normalize data introducing Dummy Variables and transform feature in numerical data
-	\item Calculate and plot Pearson correlation coefficient (PCC) on each pair of features to  show the dependencies between features
-	\item Calculate the three different types of Naive Bayes classifier and compare the incorrect prediction results
-	\item Calculate the model metrics using the Gaussian Naive Bayes 
-	\item Calculate the probability of each class (dead or survived)
+	\item The Pearson correlation coefficient (PCC) on each pair of features is plotted to inspect the dependencies between features. Naive Bayes classifier requires independent features to get the best results.
+	\item The three types of Naive Bayes classifier (Gaussian, Bernoulli, Multinomial) are used on the test set (30\% of dataset) to inspect the incorrect prediction results. Bernoulli Naive Bayes achieved the lowest error rate.
+	\item The model metrics using the Gaussian Naive Bayes are calculated and the probability of each class (dead or survived) is predicted.
 	\item Plot the learning curve for Gaussian classifier and Bernoulli Naive Bayes classifier
 \end{enumerate}
 
@@ -459,9 +447,9 @@ Python Scikit-learn library has been choosen.
 	\begin{tabular}{|l|l|l|}
 		\hline
 		\textbf{Measure} & \textbf{Train} & \textbf{Validation} \\ \hline
-		Accuracy       	 & 0.79    & 0.83 \\ \hline
-		Recall    		 & 0.71    & 0.82 \\ \hline
-		Precision    	 & 0.75    & 0.75 \\ \hline
+		Accuracy       	 & 0.80    & 0.84 \\ \hline
+		Recall    		 & 0.72    & 0.82 \\ \hline
+		Precision    	 & 0.74    & 0.75 \\ \hline
 	\end{tabular}
 \end{table}
 

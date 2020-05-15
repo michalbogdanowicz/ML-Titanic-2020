@@ -105,7 +105,7 @@ The names are going to be deleted, as that should not influence the result.
 \section{Logistic Regression}
 \subsection{Remark}
 
-Since a lot of the data is a binary variable (0,1). The square of 0 and 1 comes back to the same value. That means that eleveting features which have only values 0 and 1 adds nothing to the model. Even more, it adds a fully correlated feature. Which has a negative impact on the model (even though it has not been the case empirically for this model. The reasons seems to be that the ensuring overestimation has no effect on the final result. The reasoning used still stands : Avoid correlated features for ML).
+Since a lot of the data is a binary variable (0,1). The square of 0 and 1 comes back to the same value. That means that eleveting features which have only values 0 and 1 adds nothing to the model. Even more, it adds a fully correlated feature. Which has a negative impact on the model.
 \\
 \subsection{Procedure}
 
@@ -113,7 +113,7 @@ Procedure used for selecting the Logistic Regression model.
 
 \begin{enumerate}  
 \item The maximum polynomial was chosen by comparing the measures obtained with Cross Validation (CV) methodology. The data can be seen in Table
-\ref{tab:LR-Measures}. Maximum degree 2 has prevailed in most iterations. At each iteration the folds are randomized, and maximum degree 1 rarely beat 2.
+\ref{tab:LR-Measures}. Maximum degree 2 has prevailed in most iterations. At each iteration the folds are randomized, and maximum degree 1 rarely beat 2. (Note that only 1,0 features are not added in higher degree polynomials)
 
 \begin{table}[]
 \centering

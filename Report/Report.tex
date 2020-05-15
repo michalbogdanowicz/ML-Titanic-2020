@@ -86,8 +86,21 @@ Some children traveled only with a nanny, therefore parch=0 for them.
 
 
 \subsection{Data Preparation}
-The data cannot be used as it is.
+The data cannot be used as it is. Here is the procedure used for the data preparetion. This follows mostly the data that the project was supposed to use at the begining.
+
 The names are going to be deleted, as that should not influence the result.
+
+\begin{itemize}
+\item \textbf{Handling of NA values} : Age, fare and embarked have null values. For Age and fare the mean age has been used and for embarked the mode.
+\item \textbf{Extraction of title and name deletion} : The title is extracted from the name. And the name feature is deleted as being mostly unique and being given arbitrarly by parents does not add andything to the model. An argument could be made that title is correlated witht the ticket class.  
+\item \textbf{Elimination of cabin}: The amount of different cabins and the frequency of NA is such that it wold not add anything to the model. Additionaly some people had multiple cabins.
+\item \textbf{Elimination of Ticket}: The ticket is shared by people who embarked together. But a feature would need to be created for each ticket. This would mean more than 500 new features. And possibly lead to overfitting on training set. 
+\item \textbf{Elimination of body}: Indicates the fact that the body has been found. This means that the person 100\% died. Removed as it simplified too much the problem. 
+\item  \textbf{Elimination of Ticket Number}: The Ticket Number is eliminated because it would only make sense to use to connect people with the same ticket number. This would create c.a 700 different features. Since using it as a single feature would add nothing to the model.
+\item \textbf{Elimination of Boat}: The boat is the the boat that the person has been rescued on. This would mean near 100\% survivability. This had been removed because it simplifies too much the problem. (e.g. logistical regression was giving  95\% accuracy and disregarded most of other features).
+\item \textbf{Elimination of home.dest}: The destination would not have changed anything. Add would have added 386 new features to handle.
+\item \textbf{Dummy varibles}: Sex, Title, Embarked and pcClass need to have dummy variables. That is n-1 features for each feature, with a one-hot encoding. This is becxause there is no linear correlation between their values and they do not express magnitude. PcClass actually does express a better income in reverse order. But let us assume that 1st class are not inherently "greater" than 3rd class passangers.
+\end{itemize}
 
 \section{Logistic Regression}
 \subsection{Remark}

@@ -87,8 +87,6 @@ Some children traveled only with a nanny, therefore parch=0 for them.
 \subsection{Data Preparation}
 The data cannot be used as it is. Here is the procedure used for the data preparetion. This follows mostly the data that the project was supposed to use at the begining.
 
-The names are going to be deleted, as that should not influence the result.
-
 \begin{itemize}
 \item \textbf{Handling of NA values} : Age, fare and embarked have null values. For Age and fare the mean age has been used and for embarked the mode.
 \item \textbf{Extraction of title and name deletion} : The title is extracted from the name. And the name feature is deleted as being mostly unique and being given arbitrarly by parents does not add anything to the model. An argument could be made that title is correlated witht the ticket class.  
@@ -100,7 +98,7 @@ The names are going to be deleted, as that should not influence the result.
 \item \textbf{Elimination of home.dest}: The destination would not have changed anything. Add would have added 386 new features to handle.
 \item \textbf{Dummy variables}: Sex, Title, Embarked and pcClass need to have dummy variables. That is n-1 features for each feature, with a one-hot encoding. This is because there is no linear correlation between their values and they do not express magnitude. PcClass actually does express a better income in reverse order. But let us assume that 1st class are not inherently "greater" than 3rd class passengers.
 \end{itemize}
-
+\newpage
 \section{Logistic Regression}
 \subsection{Remark}
 
@@ -221,8 +219,9 @@ Every feature, with addition of the features not having only 0's and 1's elevate
 
 
 \subsection{Outcome explanation}
-The model is based on linear regression. The weights can be printed as too have an inclination on to why
-
+The accuracy that has been reached is based on the ability of the logistic regression to use the correlation of the features to the survival of the person. It is more certain of a person's survival the more features with a positive weight are higher, and the more negative weighted features are lower . 
+This can be seen by plotting the weights (which must then be related to the range of values taken by features). \\
+The addition of squared features improving the accuracy means that there is a non-linear correlation between those features and the survival of a person. 
 \newpage
 
 \section{Neural Network}
@@ -247,8 +246,8 @@ Following the procedure described, the best accuracy ( it is assumed that this i
 \subsection{Outcome explanation}
 Since the model is based on neural networks, the featues are chosen autonomously by algorithm. Without taking a deep look on the weights of the layers(and even then, probably only with one single layer.) it is impossible to explain why the model works. 
 E.g why do 2 HL with 28 nodes yield similar result to 1 HL with 3 nodes? (there is a difference of 0.004 accuracy) Could it be that the linear combination on the first layer is enough to predict correctly most of survivals? And a second layer finds the non-linear correlation between the survival and the features? Again why 4 nodes perform worse than 3? \\
-The positive outcome is based on the fact that neural networks are able to approximate any funcion. Which means that there must exist some function having the codomain of the survival of a person, and the domain as the features, with 100\% accuracy. And the amount of nodes and layers affects the ability of the Neural Network to come close to that function.
-
+The positive outcome is based on the fact that neural networks are able to approximate any funcion. Which means that there must exist some function having the codomain of the survival of a person, and the domain as the features, with 100\% accuracy. And the amount of nodes and layers affects the ability of the Neural Network to come close to that function.\\
+The better behaviour of the model when scaled is due to how the algorithm are implemented. Taking a wild guess, it could be that 0 values (avoided with scaling) are harder to "use" in a productive way for weight adjustment in multiplicative combination as the result would be always be 0.
 
 \begin{table}[]
 \caption{Rows = num hidden layers, Columns = size of hidden layers. Without scaling.}

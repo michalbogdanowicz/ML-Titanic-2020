@@ -246,8 +246,8 @@ Following the procedure described, the best accuracy ( it is assumed that this i
 
 \subsection{Outcome explanation}
 Since the model is based on neural networks, the featues are chosen autonomously by algorithm. Without taking a deep look on the weights of the layers(and even then, probably only with one single layer.) it is impossible to explain why the model works. 
-E.g why do 2 HL with 28 nodes yield similar result to 1 GL with 3 nodes? (there is a difference of 0.004 accuracy) Could it be that the linear combination on the first layer is enough to predict correctly most of survivals? And a second layer finds the non-linear correlation between the survival and the features? Again why 4 nodes perform worse than 3? \\
-The positive outcome is based on the fact that neural networks are able to approximate any funcion. Which means that there must be some correlation between the features and the survival of a person.
+E.g why do 2 HL with 28 nodes yield similar result to 1 HL with 3 nodes? (there is a difference of 0.004 accuracy) Could it be that the linear combination on the first layer is enough to predict correctly most of survivals? And a second layer finds the non-linear correlation between the survival and the features? Again why 4 nodes perform worse than 3? \\
+The positive outcome is based on the fact that neural networks are able to approximate any funcion. Which means that there must exist some function having the codomain of the survival of a person, and the domain as the features, with 100\% accuracy. And the amount of nodes and layers affects the ability of the Neural Network to come close to that function.
 
 
 \begin{table}[]

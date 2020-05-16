@@ -463,27 +463,9 @@ An ensemble is grown with 50 trees using Random Forest. As illustrated the lowes
 	\label{fig:CV}
 \end{figure}
 	
-\subsection{Lesson learned}
-\subsubsection{Advantages of Decision Trees}
-\begin{itemize}
-	\item No necessity for data normalization or feature scaling
-	\item Suitable for mixed feature data types
-	\item Easy results interpretation with trees of small depth
-\end{itemize}
-\subsubsection{Disadvantages of Decision Trees}
-\begin{itemize}
-	\item Prone to overfit with real-world datasets (high depth trees) and thus leading to higher variance in the model
-\end{itemize}
-
-\subsubsection{Advantages of Random Forest}
-\begin{itemize}
-	\item No overfitting due to ensemble of decision trees
-	\item Parallel computation
-\end{itemize}
-\subsubsection{Disadvantages of Random Forest}
-\begin{itemize}
-	\item Scalability problem with high-dimensional data
-\end{itemize}
+\subsection{Outcome explanation}
+Decision trees do not need to normalize or scale feature to work well. They are suitable fo mixed feature data types and the result interpretation of small depth trees is easy. However, they tend to overfit data (high depth trees)  and cause higher variance in the model.
+\break Random forests solve the overfitting problem due to the average result gained from the tree ensemble. However, with high-dimensional data scalability problems arise.
 
 \section{Naive Bayes Classifier}
 A Naive Bayes classifier is a probabilistic machine learning model that’s used for classification task. The classifier is based on the probabilistic Bayes theorem.
@@ -581,16 +563,8 @@ Python Scikit-learn library has been chosen.
 	\label{fig:Bernoulli-curve}
 \end{figure}
 
-\subsection{Lesson learned}
-\subsubsection{Advantages}
-\begin{itemize}
-	\item Fast and easy to implement
-\end{itemize}
-\subsubsection{Disadvantages}
-\begin{itemize}
-	\item Features have to be independent for good classifier performance
-\end{itemize}
-
+\subsection{Outcome explanation}
+Naive Bayes is easy and fast to implement. The algorithm works well in most of the cases because the crux is the calculation of probabilities. However, the correlation between features alters the probability calculation. Therefore, the best metrics are only achieved providing datasets composed of independent features.
 
 \section{Conclusion}
 Machine learning is a constantly evolving broad and interesting topic.

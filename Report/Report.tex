@@ -219,6 +219,10 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \subsection{Chosen model.}
 Every feature, with addition of the features not having only 0's and 1's elevated to the second power. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustment step would be meaningless). 
 
+
+\subsection{Outcome explanation}
+The model is based on linear regression. The weights can be printed as too have an inclination on to why
+
 \newpage
 
 \section{Neural Network}
@@ -238,7 +242,13 @@ Every feature, with addition of the features not having only 0's and 1's elevate
 
 
 \subsection{Chosen Model}
-Following the procedure described the best accuracy ( it is assumed that this is the most important measure, for this problem) is obtained by creating a Neural Network with 2 hidden layers each mad up of 28 nodes, obtaining an accuracy of 0.814. Do note that other valid candidates for simplicity are 2 hidden layers with 10 (0.812) and a single hidden layer with 3 nodes (0.810).
+Following the procedure described, the best accuracy ( it is assumed that this is the most important measure, for this problem) is obtained by creating a Neural Network with 2 hidden layers each mad up of 28 nodes, obtaining an accuracy of 0.814. Do note that other valid candidates for simplicity are 2 hidden layers with 10 (0.812) and a single hidden layer with 3 nodes (0.810).
+
+\subsection{Outcome explanation}
+Since the model is based on neural networks, the featues are chosen autonomously by algorithm. Without taking a deep look on the weights of the layers(and even then, probably only with one single layer.) it is impossible to explain why the model works. 
+E.g why do 2 HL with 28 nodes yield similar result to 1 GL with 3 nodes? (there is a difference of 0.004 accuracy) Could it be that the linear combination on the first layer is enough to predict correctly most of survivals? And a second layer finds the non-linear correlation between the survival and the features? Again why 4 nodes perform worse than 3? \\
+The positive outcome is based on the fact that neural networks are able to approximate any funcion. Which means that there must be some correlation between the features and the survival of a person.
+
 
 \begin{table}[]
 \caption{Rows = num hidden layers, Columns = size of hidden layers. Without scaling.}

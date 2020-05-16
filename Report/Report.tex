@@ -91,20 +91,20 @@ The names are going to be deleted, as that should not influence the result.
 
 \begin{itemize}
 \item \textbf{Handling of NA values} : Age, fare and embarked have null values. For Age and fare the mean age has been used and for embarked the mode.
-\item \textbf{Extraction of title and name deletion} : The title is extracted from the name. And the name feature is deleted as being mostly unique and being given arbitrarly by parents does not add andything to the model. An argument could be made that title is correlated witht the ticket class.  
-\item \textbf{Elimination of cabin}: The amount of different cabins and the frequency of NA is such that it wold not add anything to the model. Additionaly some people had multiple cabins.
+\item \textbf{Extraction of title and name deletion} : The title is extracted from the name. And the name feature is deleted as being mostly unique and being given arbitrarly by parents does not add anything to the model. An argument could be made that title is correlated witht the ticket class.  
+\item \textbf{Elimination of cabin}: The amount of different cabins and the frequency of NA is such that it wold not add anything to the model. Additionally some people had multiple cabins.
 \item \textbf{Elimination of Ticket}: The ticket is shared by people who embarked together. But a feature would need to be created for each ticket. This would mean more than 500 new features. And possibly lead to overfitting on training set. 
 \item \textbf{Elimination of body}: Indicates the fact that the body has been found. This means that the person 100\% died. Removed as it simplified too much the problem. 
 \item  \textbf{Elimination of Ticket Number}: The Ticket Number is eliminated because it would only make sense to use to connect people with the same ticket number. This would create c.a 700 different features. Since using it as a single feature would add nothing to the model.
 \item \textbf{Elimination of Boat}: The boat is the the boat that the person has been rescued on. This would mean near 100\% survivability. This had been removed because it simplifies too much the problem. (e.g. logistical regression was giving  95\% accuracy and disregarded most of other features).
 \item \textbf{Elimination of home.dest}: The destination would not have changed anything. Add would have added 386 new features to handle.
-\item \textbf{Dummy varibles}: Sex, Title, Embarked and pcClass need to have dummy variables. That is n-1 features for each feature, with a one-hot encoding. This is becxause there is no linear correlation between their values and they do not express magnitude. PcClass actually does express a better income in reverse order. But let us assume that 1st class are not inherently "greater" than 3rd class passangers.
+\item \textbf{Dummy variables}: Sex, Title, Embarked and pcClass need to have dummy variables. That is n-1 features for each feature, with a one-hot encoding. This is because there is no linear correlation between their values and they do not express magnitude. PcClass actually does express a better income in reverse order. But let us assume that 1st class are not inherently "greater" than 3rd class passengers.
 \end{itemize}
 
 \section{Logistic Regression}
 \subsection{Remark}
 
-Since a most of the feature are binary their sqaure result the same value. That means that eleveting features which have only values 0 and 1 adds nothing to the model. Even more, it adds a fully correlated feature. Which has a negative impact on the model. Thus only non-binary features are addded at a higher degree.
+Since a most of the feature are binary their square result the same value. That means that elevating features which have only values 0 and 1 adds nothing to the model. Even more, it adds a fully correlated feature. Which has a negative impact on the model. Thus only non-binary features are added at a higher degree.
 \\
 \subsection{Procedure}
 
@@ -217,7 +217,7 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \end{figure}
 
 \subsection{Chosen model.}
-Every feature, with addition of the features not having only 0's and 1's elevated to the second power. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustement step would be meaningless). 
+Every feature, with addition of the features not having only 0's and 1's elevated to the second power. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustment step would be meaningless). 
 
 \newpage
 
@@ -232,7 +232,7 @@ Every feature, with addition of the features not having only 0's and 1's elevate
 	
 	\item Driven by curiosity another test battery was set up. This battery tries to check for 1-2 hidden layers from 1 to 10 nodes each. The results is very interesting, seen in the table (Table \ref{tab:NN-LessNodesPerLayer}). One layer with 3 nodes is to be enough to come very close to the accuracy given by 2 hidden layers and 28 nodes. The best model in this range is two layers and 10 nodes. The one found in the previous step is slightly better.
 	
-	\item The training curve has been visualized to check if further training examples would help and if there is high bias or variance.(Graph  \ref{figure:graph-nn-scalevsnoscale}) . There seems to be low variance and bias. The non-scaled version is much less "smooth" but much faster. It could be based on the simplification of having a lot of 0 values in the data. The scaling improves the stability of learnig and the addition of training examples has gives a stable improvement to the CV accuracy. Additional training examples would not further improve the accuracy.
+	\item The training curve has been visualized to check if further training examples would help and if there is high bias or variance.(Graph  \ref{figure:graph-nn-scalevsnoscale}) . There seems to be low variance and bias. The non-scaled version is much less "smooth" but much faster. It could be based on the simplification of having a lot of 0 values in the data. The scaling improves the stability of learning and the addition of training examples has gives a stable improvement to the CV accuracy. Additional training examples would not further improve the accuracy.
 	
 \end{enumerate}
 
@@ -258,7 +258,7 @@ Following the procedure described the best accuracy ( it is assumed that this is
 
 
 \begin{table}[]
-\caption{Attempt at using from 1 to 5 hidden layers and from 21 to 31 for the number of nodes in the layers. Using stocastic gradient descent and took 20 min of execution.
+\caption{Attempt at using from 1 to 5 hidden layers and from 21 to 31 for the number of nodes in the layers. Using stochastic gradient descent and took 20 min of execution.
 The most  accurate model is 2 hidden layers and 28 nodes each}
 \label{tab:Scaled_gradient}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
@@ -274,7 +274,7 @@ The most  accurate model is 2 hidden layers and 28 nodes each}
 
 \begin{center}
 \begin{table}[]
-\caption{Check for precision with less nodes per layer. Using only 1 or 2 layers. From 1 to 20 nodes. The best model in this range is 2 hidden layers with 10 nodes. But 1 single layer with 3 nodes also behaves very well while being much simplier.}
+\caption{Check for precision with less nodes per layer. Using only 1 or 2 layers. From 1 to 20 nodes. The best model in this range is 2 hidden layers with 10 nodes. But 1 single layer with 3 nodes also behaves very well while being much simpler.}
 \label{tab:NN-LessNodesPerLayer}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
 \hline\
@@ -310,7 +310,7 @@ There are two ways to measure the quality of a split:
 M5PrimeLab Octave toolbox has been chosen.
 \begin{enumerate}  
 	\item The model tree is build with suggested parameters. Customization of parameters has been necessary to achieve a printable plot. For example, pruning and smoothing factor are not applied to get better performance in tree construction.
-	\item Different values for K are tried to run Cross Validation. Various experiments has showed K=10 is ideal for best tradeoff between metrics and algorithm running times. The collected measures are MAE, MSE, RMSE, RRMSE, R2, nRules, nVars (table \ref{tab:CV-ModelTree}).
+	\item Different values for K are tried to run Cross Validation. Various experiments has showed K=10 is ideal for best trade-off between metrics and algorithm running times. The collected measures are MAE, MSE, RMSE, RRMSE, R2, nRules, nVars (table \ref{tab:CV-ModelTree}).
 	\item The regression tree is build with suggested parameters. Also in this case parameters has to be adjusted for best plotting. The main difference to model tree is that the leaf nodes contain response values instead of models. As for the model tree K=10 leads to the best results in the Cross Validation folding technique. The resulting measures are very similar to those ot the model tree (table \ref{tab:CV-RegressionTree}).
 	\item The model tree prediction has been calculated (table \ref{tab:Result-Prediction}). A further important insight is the input variable contributions (table \ref{tab:Vars-Contribution}).  The top three variables influencing the model are: Title (Mr.), Pclass 3 (lower class) and Sibsp (number of siblings/spouses).
 	\item The decision rules are extracted from the model tree. For curiosity the 10-fold Cross Validation technique is applied on the rules configuration (table \ref{tab:CV-Rules}) to compare the measures with those of the trees (model and regression). The Mean Square Error (MSE) is slightly higher although the number of rules used are more than halved.
@@ -595,7 +595,7 @@ Python Scikit-learn library has been chosen.
 \section{Conclusion}
 Machine learning is a constantly evolving broad and interesting topic.
 \break This project gave us the possibility to experiment with Supervised Learning algorithms.
-As mentioned in the lectures, there is no silver bullet that can be applied to every problem. Every algorithm has its characteristics and relative drawbacks. Real-World experice seems to be required to chooose the best fitting methodology a priori.
-The project was stimultating, so much that up to the possibility of performing some data science challenges available in kaggle.com .
+As mentioned in the lectures, there is no silver bullet that can be applied to every problem. Every algorithm has its characteristics and relative drawbacks. Real-World experice seems to be required to choose the best fitting methodology a priori.
+The project was stimulating, so much that up to the possibility of performing some data science challenges available in kaggle.com .
 \end{document}
 

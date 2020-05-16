@@ -434,6 +434,9 @@ Following Measures are collected:
 \vfill
 \clearpage
 
+\subsection{Outcome explanation}
+Decision trees do not need normalization or feature scaling to work well. They are suitable for mixed feature data types and the result interpretation of small depth trees is easy. However, they tend to overfit data (high depth trees) and cause higher variance in the model. The Cross Validation technique lowered the decision rules from 163 to 71. This is linked with the fact that K subsets has been used to train the model instead of using the complete dataset.
+
 \subsection{Introduction: Random Forest}
 Random forest is an ensemble of many decision trees. Random forests are built using a method called bagging in which each decision tree is used as parallel estimator.
 Random forests reduce the risk of overfitting and accuracy is much higher than a single decision tree. Furthermore, decision trees in a random forest run in parallel so that the time does not become a bottleneck but performance is required.
@@ -474,8 +477,8 @@ An ensemble is grown with 50 trees using Random Forest. As illustrated the lowes
 \end{figure}
 	
 \subsection{Outcome explanation}
-Decision trees do not need to normalize or scale feature to work well. They are suitable fo mixed feature data types and the result interpretation of small depth trees is easy. However, they tend to overfit data (high depth trees)  and cause higher variance in the model.
-\break Random forests solve the overfitting problem due to the average result gained from the tree ensemble. However, with high-dimensional data scalability problems arise.
+Random forests solve the overfitting problem due to the averaged result extracted from the tree ensemble. However, with high-dimensional data scalability problems arise.
+The usage of an ensemble of size 50 gave the best results. With 100 and more trees the results do not change expect the running times due to the greater amount of trees to build. The fact that 8 features in combination with 50 trees achieve the lowest error rate is because the dataset is composed by features of different importance which tend to influence differently the classifier results. Also correlations between features play a crucial role in this context.
 
 \section{Naive Bayes Classifier}
 A Naive Bayes classifier is a probabilistic machine learning model that’s used for classification task. The classifier is based on the probabilistic Bayes theorem.
@@ -574,12 +577,12 @@ Python Scikit-learn library has been chosen.
 \end{figure}
 
 \subsection{Outcome explanation}
-Naive Bayes is easy and fast to implement. The algorithm works well in most of the cases because the crux is the calculation of probabilities. However, the correlation between features alters the probability calculation. Therefore, the best metrics are only achieved providing datasets composed of independent features.
+Naive Bayes is easy and fast to implement. The algorithm works well in most of the cases because the crux is the calculation of probabilities. However, the correlation between features alters the probability calculation. Therefore, the best metrics are only achieved providing datasets with as much as possible independent features. The better scoring results of Bernoulli classifier is based on the massive presence of boolean variables ("dummy variables").
 
 \section{Conclusion}
 Machine learning is a constantly evolving broad and interesting topic.
 \break This project gave us the possibility to experiment with Supervised Learning algorithms.
 As mentioned in the lectures, there is no silver bullet that can be applied to every problem. Every algorithm has its characteristics and relative drawbacks. Real-World experice seems to be required to choose the best fitting methodology a priori.
-The project was stimulating, so much that up to the possibility of performing some data science challenges available in kaggle.com .
+The project was stimulating, so much that up to the possibility of performing some data science challenges available in kaggle.com.
 \end{document}
 

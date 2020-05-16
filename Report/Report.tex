@@ -233,10 +233,13 @@ Every feature + the features not having only 0's and 1's elevated to the second 
 	
 	\item Driven by curiosity another test battery was set up. This battery tries to check for 1-2 hidden layers from 1 to 10 nodes each. The results is very interesting, seen in the table (Table \ref{tab:NN-LessNodesPerLayer}). One layer with 3 nodes is to be enough to come very close to the accuracy given by 2 hidden layers and 28 nodes. The best model in this range is two layers and 10 nodes. The one found in the previous step is slightly better.
 	
-	\item As it can be seen from the graph (Graph  \ref{figure:graph-nn-scalevsnoscale}) . As it can be seen the non-scaled version is much less "smooth" but much faster. It could be based on the simplification of having a lot of 0 values in the data.
+	\item The training curve has been visualized to check if further training examples would help and if there is high bias or variance.(Graph  \ref{figure:graph-nn-scalevsnoscale}) . There seems to be low variance and bias. The non-scaled version is much less "smooth" but much faster. It could be based on the simplification of having a lot of 0 values in the data. The scaling improves the stability of learnig and the addition of training examples has gives a stable improvement to the CV accuracy. Additional training examples would not further improve the accuracy.
 	
 \end{enumerate}
 
+
+\subsection{Chosen Model}
+Following the procedure described the best accuracy ( it is assumed that this is the most important measure, for this problem) is obtained by creating a Neural Network with 2 hidden layers each mad up of 28 nodes, obtaining an accuracy of 0.814. Do note that other valid candidates for simplicity are 2 hidden layers with 10 (0.812) and a single hidden layer with 3 nodes (0.810).
 
 \begin{table}[]
 \caption{Rows = num hidden layers, Columns = size of hidden layers. Without scaling.}
@@ -283,7 +286,7 @@ The most  accurate model is 2 hidden layers and 28 nodes each}
 \end{table}
 \end{center}
  
-\begin{figure}[H]
+\begin{figure}[]
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{plot-nn-learningcurve.png}
 	\caption{Accuracy is the score considered. Running on the chosen model the learning curve, scalability and performance. Same data, left side is not scaled. Scaling the values improves the accuracy, while increasing the fit\_time. }
 	\label{figure:graph-nn-scalevsnoscale}

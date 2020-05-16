@@ -111,8 +111,8 @@ Since a most of the feature are binary their sqaure result the same value. That 
 Procedure used for selecting the Logistic Regression model.
 
 \begin{enumerate}  
-\item The maximum polynomial was chosen by comparing the measures obtained with Cross Validation (CV) methodology. The data can be seen in Table
-\ref{tab:LR-Measures}. Maximum degree 2 has prevailed in most iterations. At each iteration the folds are randomized, and maximum degree 1 rarely beat 2. 
+\item The maximum polynomial was chosen by comparing the measures obtained with Cross Validation (CV) methodology. The data can be seen in (Table
+\ref{tab:LR-Measures}). Maximum degree 2 has prevailed in most iterations. At each iteration the folds are randomized, and maximum degree 1 rarely beat 2. 
 
 \begin{table}[]
 \centering
@@ -132,10 +132,10 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \end{tabular}
 \end{table}
 
-\item Bias and variance was checked by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the Graph \ref{Graph:LR-BV}, the cv and test MAE are very close. No Variance or Bias detected. 
+\item Bias and variance was checked by visualizing the Error in CV and Error on Training set on a graph with X as the degree of polynomial. As it can be seen in the (Graph \ref{Graph:LR-BV}), the cv and test MAE are very close. No Variance or Bias detected. 
 
 
-\item Quality of the model was controlled with the construction of the learning curve in Graph \ref{Graph:LR-LearningCurve} to see if there was variance and more training samples were required. They were not, as the algorithm used in octave itself states around 200 iteration that the step become too small to be worth consideration.
+\item Quality of the model was controlled with the construction of the learning curve in (Graph \ref{Graph:LR-LearningCurve}) to see if there was variance and more training samples were required. They were not, as the algorithm used in octave itself states around 200 iteration that the step become too small to be worth consideration.
 \end{enumerate}
 
 
@@ -217,7 +217,7 @@ RSE       		& 0.828 & \textbf{0.806} & 1.197 & 1.430 & 2.385 \\ \hline
 \end{figure}
 
 \subsection{Chosen model.}
-Every feature + the features not having only 0's and 1's elevated to the second power. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustement step would be meaningless).
+Every feature + the features not having only 0's and 1's elevated to the second power. With 400 max training samples ( default for octave, it would stop by himself having reached the limit around 200, when the adjustement step would be meaningless). 
 
 
 
@@ -237,10 +237,6 @@ Every feature + the features not having only 0's and 1's elevated to the second 
 	
 \end{enumerate}
 
-
-Without scaling the module reached the limit of 200 execution. And the values
-were not optimal: 
-Thesere the results 
 
 \begin{table}[]
 \caption{Rows = num hidden layers, Columns = size of hidden layers. Without scaling.}
